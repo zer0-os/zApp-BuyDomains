@@ -1,0 +1,37 @@
+name: "Bump Version"
+
+on:
+  push:
+    branches:
+      - "production"
+
+jobs:
+  bump-version:
+    name: "Bump Version on production"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout source code"
+        uses: "actions/checkout@v2"
+      - run: npm install
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Setup Node.js"
+        uses: "actions/setup-node@v1"
+        with:
+          node-version: 14
+      - name: "Automated Version Bump"
+        id: version_bump_and_create_tag
+        run: node action.js
+      - name: "cat package.json"
+        run: cat ./package.json
+
+      - name: Upload release notes
+        if: steps.version_bump_and_create_tag.outputs.TAG
+        uses: Roang-zero1/github-create-release-action@master
+        with:
+          created_tag: ${{ steps.version_bump_and_create_tag.outputs.TAG }}
+          release_title: ${{ steps.version_bump_and_create_tag.outputs.TAG }}
+          update_existing: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
