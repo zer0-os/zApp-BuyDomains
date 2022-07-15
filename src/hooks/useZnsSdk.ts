@@ -6,6 +6,8 @@ import { ZnsSdkContext } from '../providers/ZnsSdkProvider';
  * This is mainly just for DX.
  * @returns context from zns SDK provider
  */
-export function useZnsSdk() {
+export const useZnsSdk = () => {
 	return useContext(ZnsSdkContext);
-}
+};
+
+export default useZnsSdk;

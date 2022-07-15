@@ -1,0 +1,68 @@
+@use 'zero-ui/src/styles/dimensions';
+@use 'zero-ui/src/styles/colors';
+@use 'zero-ui/src/styles/typography';
+
+.BuyDomains {
+	&__Page_Container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: calc(100vh - 150px);
+	}
+
+	&__Container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		min-width: 550px;
+		max-width: 100%;
+	}
+
+	&__Header {
+		display: flex;
+		align-content: center;
+		gap: 24px;
+
+		h1 {
+			color: colors.$text-primary;
+			font-size: typography.$size-xlarge;
+			font-weight: typography.$font-weight-regular;
+			line-height: 39px;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+		}
+	}
+
+	&__Content {
+		width: 100%;
+		margin-top: 2rem;
+
+		&_Section {
+			display: flex;
+			justify-content: space-between;
+			gap: 1rem;
+	
+			&_Input {
+				flex: 1;
+				max-width: 550px;
+			}
+
+			&.Description_Section {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-top: 1rem;
+
+				&.Valid {
+					color: colors.$success-green;
+				}
+
+				&.Invalid {
+					color: red;
+					color: colors.$grey-lighter-2;
+				}
+			}
+		}
+	}
+}

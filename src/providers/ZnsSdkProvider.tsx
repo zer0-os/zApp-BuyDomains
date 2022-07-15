@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { createContext, useMemo } from 'react';
 import * as zns from '@zero-tech/zns-sdk';
 import { providers } from 'ethers';
 import {
@@ -14,16 +14,14 @@ type ZnsSdkProviderProps = {
 	children: React.ReactNode;
 };
 
-export const ZnsSdkContext = React.createContext({
-	sdk: {} as zns.Instance,
-});
+export const ZnsSdkContext = createContext({} as zns.Instance);
 
 export const ZnsSdkProvider: React.FC<ZnsSdkProviderProps> = ({
 	provider = DEFAULT_PROVIDER,
 	chainId,
 	children,
 }) => {
-	const instance = useMemo(() => {
+	const sdk = useMemo(() => {
 		/**
 		 * Use connected wallet's provider if it exists, otherwise create
 		 * a provider using the Infura URL for the selected chain
@@ -58,22 +56,7 @@ export const ZnsSdkProvider: React.FC<ZnsSdkProviderProps> = ({
 		}
 	}, [provider, chainId]);
 
-	useEffect(() => {
-		const keys = Object.keys(instance).filter((k) => k.includes('get'));
-		const s: any = {};
-		keys.forEach((key) => {
-			s[key] = (instance as any)[key];
-		});
-		(global as any).sdk = s;
-	}, [instance]);
-
-	const contextValue = {
-		sdk: instance,
-	};
-
 	return (
-		<ZnsSdkContext.Provider value={contextValue}>
-			{children}
-		</ZnsSdkContext.Provider>
+		<ZnsSdkContext.Provider value={sdk}>{children}</ZnsSdkContext.Provider>
 	);
 };

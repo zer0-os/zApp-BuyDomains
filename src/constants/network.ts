@@ -28,3 +28,5 @@ export const DEFAULT_NETWORK = Network.MAINNET;
 export const DEFAULT_PROVIDER = new providers.JsonRpcProvider(
 	RPC_URLS[DEFAULT_NETWORK],
 );
+
+export const DEFAULT_NETWORK_PROTOCAL = '0://';
