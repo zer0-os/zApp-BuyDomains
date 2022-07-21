@@ -12,7 +12,7 @@ const ChainGate: FC<ChainGateProps> = ({ chainId, children }) => {
 	if (!isSupportedNetwork) {
 		return (
 			<>
-				zFi dApp is not supported on this chain! Please switch to mainnet or
+				Buy Domains is not supported on this chain! Please switch to mainnet or
 				Rinkeby
 			</>
 		);

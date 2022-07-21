@@ -1,15 +1,13 @@
-import { providers } from 'ethers';
+import { ethers } from 'ethers';
 
 export interface AppProps {
-	provider?: providers.Web3Provider;
-	chainId?: number;
+	provider: any;
 	route: string;
 	web3: {
-		chainId?: number;
-		address: string | null | undefined;
+		chainId: number;
+		address: string;
 	};
-}
-
-export interface LegacyAppProps extends AppProps {
-	isLegacyApp?: boolean;
+	user: {
+		account: string;
+	};
 }

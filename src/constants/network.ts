@@ -20,8 +20,6 @@ export const RPC_URLS: Partial<Record<Network, string>> = {
 		'https://mainnet.infura.io/v3/77c3d733140f4c12a77699e24cb30c27',
 	[Network.RINKEBY]:
 		'https://rinkeby.infura.io/v3/fa959ead3761429bafa6995a4b25397e',
-	[Network.KOVAN]:
-		'https://kovan.infura.io/v3/d0a982194ba740eb9dcbd9e112dc2dfb',
 };
 
 export const DEFAULT_NETWORK = Network.MAINNET;

@@ -44,12 +44,6 @@ export const ZnsSdkProvider: React.FC<ZnsSdkProviderProps> = ({
 				);
 			}
 
-			case NETWORK_TYPES.KOVAN: {
-				return zns.createInstance(
-					zns.configuration.kovanConfiguration(provider),
-				);
-			}
-
 			default: {
 				throw new Error('SDK isn´t available for this chainId');
 			}

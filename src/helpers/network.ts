@@ -9,8 +9,6 @@ export const getEtherscanUri = (networkType: NETWORK_TYPES): string => {
 		case NETWORK_TYPES.RINKEBY:
 			prefix = 'rinkeby.';
 			break;
-		case NETWORK_TYPES.KOVAN:
-			prefix = 'kovan.';
 	}
 	const uri = `https://${prefix}etherscan.io/`;
 
