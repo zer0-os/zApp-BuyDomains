@@ -11,9 +11,24 @@
 			flex: 1;
 			max-width: 550px;
 
-			> input {
-				width: 100%;
-				height: 100%;
+			:global(.zui-input-wrapper) {
+				gap: 0.25rem;
+
+				:global(.zui-input-enhancer-start) {
+					.StartEnhancer {
+						color: colors.$grey-lighter-2;
+					}
+				}
+
+				:global(.zui-input-enhancer-end) {
+					padding-right: 0.5rem;
+
+					.EndEnhancer {
+						> * > * {
+							margin: unset;
+						}
+					}
+				}
 			}
 		}
 
@@ -21,6 +36,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			text-align: center;
 			margin-top: 1rem;
 
 			&.Valid {

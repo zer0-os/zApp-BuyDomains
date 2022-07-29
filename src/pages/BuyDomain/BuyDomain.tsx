@@ -1,9 +1,13 @@
-import { FC, useState } from 'react';
-import { AppProps } from '../../types';
-import { IconZero, DomainSearch, BuyDomainModal } from '../../components';
-import styles from './BuyDomains.module.scss';
+import type { FC } from 'react';
+import type { AppProps } from '../../types';
 
-export const BuyDomains: FC<AppProps> = ({ provider, route }) => {
+import { useState } from 'react';
+import { IconZero, DomainSearch, BuyDomainModal } from '../../components';
+import styles from './BuyDomain.module.scss';
+
+type BuyDomainProps = Pick<AppProps, 'user' | 'provider'>;
+
+export const BuyDomain: FC<BuyDomainProps> = ({ user, provider }) => {
 	const [buyDomainModal, setBuyDomainModal] = useState<{
 		isOpen;
 		domainName;
@@ -19,7 +23,7 @@ export const BuyDomains: FC<AppProps> = ({ provider, route }) => {
 		});
 	};
 
-	const handleOnWizardClose = () => {
+	const handleOnModalClose = () => {
 		setBuyDomainModal({
 			...buyDomainModal,
 			isOpen: false,
@@ -43,12 +47,13 @@ export const BuyDomains: FC<AppProps> = ({ provider, route }) => {
 
 			{buyDomainModal.isOpen && (
 				<BuyDomainModal
-					domainName={buyDomainModal.domainName}
-					onClose={handleOnWizardClose}
+					user={user}
+					provider={provider}
+					onClose={handleOnModalClose}
 				/>
 			)}
 		</>
 	);
 };
 
-export default BuyDomains;
+export default BuyDomain;

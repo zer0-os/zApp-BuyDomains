@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ChainGate from './util/ChainGate';
 import { ZnsSdkProvider } from './providers/ZnsSdkProvider';
+import { BuyDomainProvider } from './providers/BuyDomainProvider';
 import { AppProps } from './types';
-import { BuyDomains } from './pages';
+import { BuyDomain } from './pages';
 
 const queryClient = new QueryClient();
 
@@ -11,12 +12,9 @@ const App = ({ provider, web3, route, user }: AppProps) => {
 		<ChainGate chainId={web3.chainId}>
 			<ZnsSdkProvider chainId={web3.chainId} provider={provider}>
 				<QueryClientProvider client={queryClient}>
-					<BuyDomains
-						provider={provider}
-						web3={web3}
-						route={route}
-						user={user}
-					/>
+					<BuyDomainProvider>
+						<BuyDomain user={user} provider={provider} />
+					</BuyDomainProvider>
 				</QueryClientProvider>
 			</ZnsSdkProvider>
 		</ChainGate>

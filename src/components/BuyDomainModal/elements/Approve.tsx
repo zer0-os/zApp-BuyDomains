@@ -1,19 +1,123 @@
-import React from 'react';
-import Button from 'zero-ui/src/components/Button';
+import type { FC } from 'react';
+import type { BuyDomainModalProps } from '../BuyDomainModal';
+
+import { useState, useEffect, useCallback } from 'react';
+import Wizard from 'zero-ui/src/components/Wizard';
 import { DefaultDomainImg } from './DefaultDomainImg';
+import { useZnsSdk } from '../../../hooks/useZnsSdk';
 import styles from '../BuyDomainModal.module.scss';
 
-type ApproveProps = {
-	domainName: string;
+enum ApproveStep {
+	Checking = 'Checking',
+	UnApproved = 'UnApproved',
+	ApproveConfirm = 'ApproveConfirm',
+	Approving = 'Approving',
+}
+
+type ApproveProps = Pick<BuyDomainModalProps, 'user' | 'provider'> & {
+	onPrevStep: () => void;
 	onNextStep: () => void;
 };
 
-export const Approve: React.FC<ApproveProps> = ({ domainName, onNextStep }) => {
+export const Approve: FC<ApproveProps> = ({
+	user,
+	provider,
+	onPrevStep,
+	onNextStep,
+}) => {
+	const sdk = useZnsSdk();
+
+	const [step, setStep] = useState<ApproveStep>(ApproveStep.Checking);
+	const [error, setErrror] = useState<string>();
+
+	const checkSpendTokens = useCallback(async () => {
+		setStep(ApproveStep.Checking);
+
+		// Set delay to show checking
+		// because SDK promise took too short
+		await new Promise((res) => setTimeout(res, 1000));
+
+		try {
+			const isApproved = await sdk.minting.isMinterApprovedToSpendTokens(
+				user.account,
+			);
+
+			if (isApproved) {
+				onNextStep();
+			} else {
+				setStep(ApproveStep.UnApproved);
+			}
+		} catch (e: any) {
+			setErrror(e.message);
+			setStep(ApproveStep.UnApproved);
+		}
+	}, [user, sdk, setStep, onNextStep]);
+
+	const approveSpendTokens = useCallback(async () => {
+		setStep(ApproveStep.ApproveConfirm);
+		setErrror(undefined);
+
+		try {
+			const tx = await sdk.minting.approveMinterToSpendTokens(
+				provider.getSigner(),
+			);
+
+			try {
+				setStep(ApproveStep.Approving);
+				await tx.wait();
+				onNextStep();
+			} catch (e: any) {
+				setErrror(e.message);
+				setStep(ApproveStep.UnApproved);
+			}
+		} catch (e: any) {
+			setErrror(e.code === 4001 ? 'Approval rejected by wallet.' : e.message);
+			setStep(ApproveStep.UnApproved);
+		}
+	}, [provider, sdk, setStep, onNextStep]);
+
+	useEffect(() => {
+		checkSpendTokens();
+	}, []);
+
 	return (
 		<div className={styles.WizardContent}>
-			<DefaultDomainImg />
-			<h2>Approve</h2>
-			<Button onPress={onNextStep}>Next Step</Button>
+			{step === ApproveStep.Checking && <DefaultDomainImg />}
+
+			<div className={styles.WizardContentSection}>
+				{step === ApproveStep.Checking && (
+					<Wizard.Loading message="Checking status of ZERO Spending approval..." />
+				)}
+
+				{step === ApproveStep.UnApproved && (
+					<Wizard.Confirmation
+						className={styles.Confirmation}
+						error={error}
+						message="Before you mint this domain, you must approve ZERO spending in your wallet. This costs gas, you will only need to it once."
+						primaryButtonText="Approve"
+						isPrimaryButtonActive
+						isSecondaryButtonActive
+						onClickPrimaryButton={approveSpendTokens}
+						onClickSecondaryButton={onPrevStep}
+					/>
+				)}
+
+				{step === ApproveStep.ApproveConfirm && (
+					<div className={styles.Loading}>
+						<Wizard.Loading
+							message="Before you mint this domain, you must approve ZERO spending in your wallet. This costs gas, you will only need to it once."
+							subtext="Please approve in your wallet..."
+						/>
+					</div>
+				)}
+
+				{/* TODO:: Add Tooltip in zUI and implement it according design */}
+				{step === ApproveStep.Approving && (
+					<div className={styles.Loading}>
+						<Wizard.Loading message="Approving ZERO spending, please wait..." />
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

@@ -1,4 +1,6 @@
-export const IconZero: React.FC = () => (
+import type { FC } from 'react';
+
+export const IconZero: FC = () => (
 	<svg
 		width="36"
 		height="36"

@@ -1,20 +1,5 @@
 import { Network, DEFAULT_NETWORK, NETWORK_TYPES } from '../constants/network';
 
-export const getEtherscanUri = (networkType: NETWORK_TYPES): string => {
-	let prefix = '';
-	switch (networkType) {
-		case NETWORK_TYPES.ROPSTEN:
-			prefix = 'ropsten.';
-			break;
-		case NETWORK_TYPES.RINKEBY:
-			prefix = 'rinkeby.';
-			break;
-	}
-	const uri = `https://${prefix}etherscan.io/`;
-
-	return uri;
-};
-
 export const chainIdToNetworkType = (chainId?: Network): NETWORK_TYPES => {
 	if (!chainId) {
 		chainId = DEFAULT_NETWORK;

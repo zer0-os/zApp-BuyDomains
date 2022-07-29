@@ -1,49 +1,42 @@
-import React from 'react';
+import type { FC } from 'react';
+
 import classNames from 'classnames/bind';
 import Input from 'zero-ui/src/components/Input';
 import Button from 'zero-ui/src/components/Button';
+import LoadingIndicator from 'zero-ui/src/components/LoadingIndicator';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../constants/network';
-import { useDomainAvailability } from '../../hooks/useDomainAvailability';
+import { useBuyDomain, useDomainAvailability } from '../../hooks';
 import styles from './DomainSearch.module.scss';
 
 const cx = classNames.bind(styles);
 
-type DomainSearchTypes = 'default' | 'alternative';
+type DomainSearchTypes = 'default' | 'alternative' | 'nobutton';
 
 type DomainSearchProps = {
-	initialDomainName?: string;
 	type?: DomainSearchTypes;
-	onBuyButtonClick: (domainName: string) => void;
+	onBuyButtonClick?: (domainName: string) => void;
 };
 
-export const DomainSearch: React.FC<DomainSearchProps> = ({
-	initialDomainName = '',
+export const DomainSearch: FC<DomainSearchProps> = ({
 	type = 'default',
 	onBuyButtonClick,
 }) => {
-	const {
-		domainName,
-		setDomainName,
-		isLoading,
-		isDomainAvailable,
-		isDomainSearchEnabled,
-	} = useDomainAvailability(initialDomainName);
+	const { domainName, setDomainName } = useBuyDomain();
+	const { isLoading, isDomainSearchEnabled, isDomainAvailable, domainPrice } =
+		useDomainAvailability();
 
 	const handleOnChange = (value: string) => {
 		let correctValue = value;
-		if (DEFAULT_NETWORK_PROTOCAL.startsWith(value)) {
-			correctValue = '';
-		}
 		correctValue = correctValue
 			.replace(DEFAULT_NETWORK_PROTOCAL, '')
-			.replace(/[^a-zA-Z0-9]/g, '')
+			.replace(/[^a-z0-9]/g, '')
 			.replace(/\s+/g, '');
 
 		setDomainName(correctValue);
 	};
 
 	const handleOnBuyButtonClick = () => {
-		onBuyButtonClick(domainName);
+		onBuyButtonClick?.(domainName);
 	};
 
 	const buyDomainButton = () => (
@@ -67,15 +60,27 @@ export const DomainSearch: React.FC<DomainSearchProps> = ({
 			<div className={styles.Section}>
 				<Input
 					className={styles.Input}
-					label=""
 					placeholder="Search for your domain..."
-					value={DEFAULT_NETWORK_PROTOCAL + domainName}
+					value={domainName}
 					onChange={handleOnChange}
+					startEnhancer={
+						<div className={styles.StartEnhancer}>
+							{domainName.length > 0 && DEFAULT_NETWORK_PROTOCAL}
+						</div>
+					}
+					endEnhancer={
+						<div className={styles.EndEnhancer}>
+							{isLoading ? (
+								<LoadingIndicator text="" />
+							) : type === 'default' ? (
+								buyDomainButton()
+							) : null}
+						</div>
+					}
 				/>
-				{type === 'default' && buyDomainButton()}
 			</div>
 
-			{isDomainSearchEnabled && (
+			{isDomainSearchEnabled && !isLoading && (
 				<div
 					className={cx(styles.Section, styles.DescriptionSection, {
 						Invalid: !isDomainAvailable,
@@ -83,7 +88,7 @@ export const DomainSearch: React.FC<DomainSearchProps> = ({
 					})}
 				>
 					{isDomainAvailable
-						? 'Domain available for 10,000 ZERO. No renewall fee, ever.'
+						? `Domain available for ${domainPrice} ZERO. No renewall fee, ever.`
 						: 'Someone already explored that part of the universe, try again...'}
 				</div>
 			)}

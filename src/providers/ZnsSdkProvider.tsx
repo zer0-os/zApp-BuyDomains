@@ -1,4 +1,6 @@
-import React, { createContext, useMemo } from 'react';
+import type { FC } from 'react';
+
+import { createContext, useMemo } from 'react';
 import * as zns from '@zero-tech/zns-sdk';
 import { providers } from 'ethers';
 import {
@@ -11,12 +13,11 @@ import { chainIdToNetworkType } from '../helpers/network';
 type ZnsSdkProviderProps = {
 	provider?: providers.Web3Provider;
 	chainId?: number;
-	children: React.ReactNode;
 };
 
 export const ZnsSdkContext = createContext({} as zns.Instance);
 
-export const ZnsSdkProvider: React.FC<ZnsSdkProviderProps> = ({
+export const ZnsSdkProvider: FC<ZnsSdkProviderProps> = ({
 	provider = DEFAULT_PROVIDER,
 	chainId,
 	children,

@@ -1,72 +1,66 @@
-import React, { useState } from 'react';
-import classNames from 'classnames/bind';
+import type { FC } from 'react';
+import type { AppProps } from '../../types';
+
+import { useState } from 'react';
 import Wizard from 'zero-ui/src/components/Wizard';
 import Modal from 'zero-ui/src/components/Modal';
-import { StepBar } from 'zero-ui/src/components/ProgressIndicators';
-import {
-	BuyDomainSteps,
-	BUY_DOMAIN_STEP_TITLES,
-} from '../../constants/domains';
+import { StepBar } from 'zero-ui/src/components/StepBar';
+import { BuyDomainStep, BUY_DOMAIN_STEPS } from '../../constants/domains';
 import { Discover, Approve, Mint, Success } from './elements';
 import styles from './BuyDomainModal.module.scss';
 
-const cx = classNames.bind(styles);
-
-type BuyDomainModalProps = {
-	domainName: string;
+export type BuyDomainModalProps = Pick<AppProps, 'user' | 'provider'> & {
 	onClose: () => void;
 };
 
-export const BuyDomainModal: React.FC<BuyDomainModalProps> = ({
-	domainName,
+export const BuyDomainModal: FC<BuyDomainModalProps> = ({
+	user,
+	provider,
 	onClose,
 }) => {
-	const [step, setStep] = useState<BuyDomainSteps>(BuyDomainSteps.Discover);
+	const [step, setStep] = useState<BuyDomainStep>(BuyDomainStep.Discover);
 
-	console.log(
-		Object.values(BuyDomainSteps),
-		Object.values(BuyDomainSteps).indexOf(step) + 1,
-	);
+	const header =
+		step === BuyDomainStep.Approve
+			? 'Approve ZERO Spending'
+			: 'Buy Your Domain';
+
 	return (
 		<Modal open onOpenChange={onClose} className={styles.Modal}>
 			<Wizard.Container
-				header="Buy Your Domain"
+				header={header}
 				subHeader="Secure your space on the Ethereum blockchain"
 				className={styles.WizardContainer}
 				sectionDivider={false}
 			>
 				<StepBar
-					step={Object.values(BuyDomainSteps).indexOf(step) + 1}
-					steps={Object.values(BuyDomainSteps)}
-					stepFormatter="CURRENT_STEP_INDEX/TOTAL_STEP_COUNT CURRENT_STEP_NAME"
-					onNavigate={(i: number) =>
-						setStep(Object.values(BuyDomainSteps)[i - 1])
-					}
+					currentStepId={step}
+					steps={BUY_DOMAIN_STEPS}
+					onChangeStep={(s) => setStep(s.id as BuyDomainStep)}
 					className={styles.StepBar}
 				/>
 
-				{step === BuyDomainSteps.Discover && (
-					<Discover
-						domainName={domainName}
-						onNextStep={() => setStep(BuyDomainSteps.Approve)}
-					/>
+				{step === BuyDomainStep.Discover && (
+					<Discover onNextStep={() => setStep(BuyDomainStep.Approve)} />
 				)}
 
-				{step === BuyDomainSteps.Approve && (
+				{step === BuyDomainStep.Approve && (
 					<Approve
-						domainName={domainName}
-						onNextStep={() => setStep(BuyDomainSteps.Mint)}
+						user={user}
+						provider={provider}
+						onPrevStep={() => setStep(BuyDomainStep.Discover)}
+						onNextStep={() => setStep(BuyDomainStep.Mint)}
 					/>
 				)}
 
-				{step === BuyDomainSteps.Mint && (
+				{step === BuyDomainStep.Mint && (
 					<Mint
-						domainName={domainName}
-						onNextStep={() => setStep(BuyDomainSteps.Success)}
+						provider={provider}
+						onNextStep={() => setStep(BuyDomainStep.Success)}
 					/>
 				)}
 
-				{step === BuyDomainSteps.Success && <Success domainName={domainName} />}
+				{step === BuyDomainStep.Success && <Success />}
 			</Wizard.Container>
 		</Modal>
 	);
