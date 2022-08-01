@@ -88,7 +88,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 					})}
 				>
 					{isDomainAvailable
-						? `Domain available for ${domainPrice} ZERO. No renewall fee, ever.`
+						? `Domain available for ${domainPrice} ZERO. No renewal fee, ever.`
 						: 'Someone already explored that part of the universe, try again...'}
 				</div>
 			)}

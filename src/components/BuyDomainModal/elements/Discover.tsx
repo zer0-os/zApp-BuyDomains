@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { DefaultDomainImg } from './DefaultDomainImg';
+import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { DomainSearch } from '../../DomainSearch';
 import styles from '../BuyDomainModal.module.scss';
 
@@ -11,7 +11,7 @@ type DiscoverProps = {
 export const Discover: FC<DiscoverProps> = ({ onNextStep }) => {
 	return (
 		<div className={styles.WizardContent}>
-			<DefaultDomainImg />
+			<DefaultDomainMedia />
 			<DomainSearch type="alternative" onBuyButtonClick={onNextStep} />
 		</div>
 	);

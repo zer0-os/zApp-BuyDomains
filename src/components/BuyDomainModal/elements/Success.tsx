@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import Button from 'zero-ui/src/components/Button';
-import { DefaultDomainImg } from './DefaultDomainImg';
+import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { useBuyDomain } from '../../../hooks';
 import { DOMAIN_TWEET_OPTION } from '../../../constants/domains';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../../constants/network';
@@ -32,7 +32,7 @@ export const Success: FC = () => {
 
 	return (
 		<div className={styles.WizardContent}>
-			<DefaultDomainImg />
+			<DefaultDomainMedia />
 
 			<div className={styles.WizardContentSection}>
 				<div className={styles.DomainName}>

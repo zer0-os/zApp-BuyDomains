@@ -3,7 +3,7 @@ import type { BuyDomainModalProps } from '../BuyDomainModal';
 
 import { useState, useEffect, useCallback } from 'react';
 import Wizard from 'zero-ui/src/components/Wizard';
-import { DefaultDomainImg } from './DefaultDomainImg';
+import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { DomainSearch } from '../../DomainSearch';
 import { useZnsSdk } from '../../../hooks/useZnsSdk';
 import { useBuyDomain } from '../../../hooks';
@@ -62,7 +62,7 @@ export const Mint: FC<MintProps> = ({ provider, onNextStep }) => {
 
 	return (
 		<div className={styles.WizardContent}>
-			<DefaultDomainImg />
+			<DefaultDomainMedia />
 
 			{step !== MintStep.Minting && <DomainSearch type="nobutton" />}
 

@@ -3,7 +3,7 @@ import type { BuyDomainModalProps } from '../BuyDomainModal';
 
 import { useState, useEffect, useCallback } from 'react';
 import Wizard from 'zero-ui/src/components/Wizard';
-import { DefaultDomainImg } from './DefaultDomainImg';
+import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { useZnsSdk } from '../../../hooks/useZnsSdk';
 import styles from '../BuyDomainModal.module.scss';
 
@@ -82,7 +82,7 @@ export const Approve: FC<ApproveProps> = ({
 
 	return (
 		<div className={styles.WizardContent}>
-			{step === ApproveStep.Checking && <DefaultDomainImg />}
+			{step === ApproveStep.Checking && <DefaultDomainMedia />}
 
 			<div className={styles.WizardContentSection}>
 				{step === ApproveStep.Checking && (
