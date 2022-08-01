@@ -1,0 +1,60 @@
+@use 'zero-ui/src/styles/dimensions';
+@use 'zero-ui/src/styles/colors';
+
+.Container {
+	.Section {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+
+		.Input {
+			flex: 1;
+			max-width: 550px;
+
+			:global(.zui-input-wrapper) {
+				gap: 0.25rem;
+
+				:global(.zui-input-enhancer-start) {
+					.StartEnhancer {
+						color: colors.$grey-lighter-2;
+					}
+				}
+
+				:global(.zui-input-enhancer-end) {
+					padding-right: 0.5rem;
+
+					.EndEnhancer {
+						> * > * {
+							margin: unset;
+						}
+					}
+				}
+			}
+		}
+
+		&.DescriptionSection {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			margin-top: 1rem;
+
+			&.Valid {
+				color: colors.$success-green;
+			}
+
+			&.Invalid {
+				color: colors.$grey-lighter-2;
+			}
+		}
+	}
+
+	.BuyButton {
+		&.Alternative {
+			margin-top: 2rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
