@@ -51,6 +51,14 @@
 			}
 
 			.WizardContentSection {
+				:global(.zui-loading-indicator) {
+					display: flex;
+					flex-direction: column-reverse;
+					align-items: center;
+					gap: 2rem;
+					text-align: center;
+				}
+
 				.Confirmation {
 					margin-top: 1rem;
 				}

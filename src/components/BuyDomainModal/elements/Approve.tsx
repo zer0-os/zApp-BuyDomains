@@ -105,8 +105,16 @@ export const Approve: FC<ApproveProps> = ({
 				{step === ApproveStep.ApproveConfirm && (
 					<div className={styles.Loading}>
 						<Wizard.Loading
-							message="Before you mint this domain, you must approve ZERO spending in your wallet. This costs gas, you will only need to it once."
-							subtext="Please approve in your wallet..."
+							message={
+								<>
+									<p>
+										Before you mint this domain, you must approve ZERO spending
+										in your wallet. This costs gas, you will only need to it
+										once.
+									</p>
+									<p>Please approve in your wallet...</p>
+								</>
+							}
 						/>
 					</div>
 				)}
