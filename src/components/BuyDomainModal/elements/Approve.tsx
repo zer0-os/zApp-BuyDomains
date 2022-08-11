@@ -3,7 +3,9 @@ import type { BuyDomainModalProps } from '../BuyDomainModal';
 
 import { useState, useEffect, useCallback } from 'react';
 import Wizard from 'zero-ui/src/components/Wizard';
+import { Tooltip } from 'zero-ui/src/components/Tooltip';
 import { DefaultDomainMedia } from './DefaultDomainMedia';
+import { QuestionButton } from '../../QuestionButton';
 import { useZnsSdk } from '../../../hooks/useZnsSdk';
 import styles from '../BuyDomainModal.module.scss';
 
@@ -119,10 +121,18 @@ export const Approve: FC<ApproveProps> = ({
 					</div>
 				)}
 
-				{/* TODO:: Add Tooltip in zUI and implement it according design */}
 				{step === ApproveStep.Approving && (
 					<div className={styles.Loading}>
-						<Wizard.Loading message="Approving ZERO spending, please wait..." />
+						<Wizard.Loading
+							message={
+								<>
+									Approving ZERO spending, please wait...{'  '}
+									<Tooltip content="This may take up to 20 minutes depending on the state of the Ethereum network.">
+										<QuestionButton />
+									</Tooltip>
+								</>
+							}
+						/>
 					</div>
 				)}
 			</div>

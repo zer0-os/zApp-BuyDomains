@@ -3,8 +3,10 @@ import type { BuyDomainModalProps } from '../BuyDomainModal';
 
 import { useState, useEffect, useCallback } from 'react';
 import Wizard from 'zero-ui/src/components/Wizard';
+import { Tooltip } from 'zero-ui/src/components/Tooltip';
 import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { DomainSearch } from '../../DomainSearch';
+import { QuestionButton } from '../../QuestionButton';
 import { useZnsSdk } from '../../../hooks/useZnsSdk';
 import { useBuyDomain } from '../../../hooks';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../../constants/network';
@@ -84,7 +86,6 @@ export const Mint: FC<MintProps> = ({ provider, onNextStep }) => {
 					/>
 				)}
 
-				{/* TODO:: Add Tooltip in zUI and implement it according design */}
 				{step === MintStep.Minting && (
 					<>
 						<div className={styles.DomainName}>
@@ -92,7 +93,16 @@ export const Mint: FC<MintProps> = ({ provider, onNextStep }) => {
 							{domainName}
 						</div>
 						<div className={styles.Loading}>
-							<Wizard.Loading message="Minting your domain on the blockchain..." />
+							<Wizard.Loading
+								message={
+									<>
+										Minting your domain on the blockchain... {'  '}
+										<Tooltip content="This may take up to 20 mintutes depending on the state of the Ethereum blockchain. Please wait...">
+											<QuestionButton />
+										</Tooltip>
+									</>
+								}
+							/>
 						</div>
 					</>
 				)}
