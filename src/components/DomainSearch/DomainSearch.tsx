@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import Input from 'zero-ui/src/components/Input';
 import Button from 'zero-ui/src/components/Button';
@@ -21,7 +22,12 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 	type = 'default',
 	onBuyButtonClick,
 }) => {
+	const [focused, setFocused] = useState<boolean>(false);
+
 	const { domainName, setDomainName } = useBuyDomain();
+
+	const showStartEnhancer = focused || domainName.length > 0;
+
 	const { isLoading, isDomainSearchEnabled, isDomainAvailable, domainPrice } =
 		useDomainAvailability();
 
@@ -59,13 +65,17 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 		<div className={styles.Container}>
 			<div className={styles.Section}>
 				<Input
-					className={styles.Input}
-					placeholder="Search for your domain..."
+					className={cx(styles.Input, {
+						ShowStartEnhancer: showStartEnhancer,
+					})}
+					placeholder={!showStartEnhancer && 'Search for your domain...'}
 					value={domainName}
+					onFocus={() => setFocused(true)}
+					onBlur={() => setFocused(false)}
 					onChange={handleOnChange}
 					startEnhancer={
 						<div className={styles.StartEnhancer}>
-							{domainName.length > 0 && DEFAULT_NETWORK_PROTOCAL}
+							{showStartEnhancer && DEFAULT_NETWORK_PROTOCAL}
 						</div>
 					}
 					endEnhancer={
