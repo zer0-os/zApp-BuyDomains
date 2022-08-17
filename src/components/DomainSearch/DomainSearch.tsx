@@ -90,18 +90,18 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 				/>
 			</div>
 
-			{isDomainSearchEnabled && !isLoading && (
-				<div
-					className={cx(styles.Section, styles.DescriptionSection, {
-						Invalid: !isDomainAvailable,
-						Valid: isDomainAvailable,
-					})}
-				>
-					{isDomainAvailable
+			<div
+				className={cx(styles.Section, styles.DescriptionSection, {
+					Invalid: !isDomainAvailable,
+					Valid: isDomainAvailable,
+				})}
+			>
+				{isDomainSearchEnabled &&
+					!isLoading &&
+					(isDomainAvailable
 						? `Domain available for ${domainPrice} ZERO. No renewal fee, ever.`
-						: 'Someone already explored that part of the universe, try again...'}
-				</div>
-			)}
+						: 'Someone already explored that part of the universe, try again...')}
+			</div>
 
 			{type === 'alternative' && buyDomainButton()}
 		</div>
