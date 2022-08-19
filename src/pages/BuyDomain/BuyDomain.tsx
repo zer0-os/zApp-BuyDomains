@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { IconZero, DomainSearch, BuyDomainModal } from '../../components';
 import styles from './BuyDomain.module.scss';
 
-type BuyDomainProps = Pick<AppProps, 'user' | 'provider'>;
+type BuyDomainProps = Pick<AppProps, 'user' | 'provider'> &
+	Pick<AppProps['web3'], 'chainId'>;
 
-export const BuyDomain: FC<BuyDomainProps> = ({ user, provider }) => {
+export const BuyDomain: FC<BuyDomainProps> = ({ user, provider, chainId }) => {
 	const [buyDomainModal, setBuyDomainModal] = useState<{
 		isOpen;
 		domainName;
@@ -49,6 +50,7 @@ export const BuyDomain: FC<BuyDomainProps> = ({ user, provider }) => {
 				<BuyDomainModal
 					user={user}
 					provider={provider}
+					chainId={chainId}
 					onClose={handleOnModalClose}
 				/>
 			)}

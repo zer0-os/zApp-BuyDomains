@@ -6,6 +6,7 @@ import Input from 'zero-ui/src/components/Input';
 import Button from 'zero-ui/src/components/Button';
 import LoadingIndicator from 'zero-ui/src/components/LoadingIndicator';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../constants/network';
+import { URLS } from '../../constants/urls';
 import { useBuyDomain, useDomainAvailability } from '../../hooks';
 import styles from './DomainSearch.module.scss';
 
@@ -15,11 +16,15 @@ type DomainSearchTypes = 'default' | 'alternative' | 'nobutton';
 
 type DomainSearchProps = {
 	type?: DomainSearchTypes;
+	isLoadingBalance?: boolean;
+	balance?: string;
 	onBuyButtonClick?: (domainName: string) => void;
 };
 
 export const DomainSearch: FC<DomainSearchProps> = ({
 	type = 'default',
+	isLoadingBalance,
+	balance,
 	onBuyButtonClick,
 }) => {
 	const [focused, setFocused] = useState<boolean>(false);
@@ -28,8 +33,21 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 
 	const showStartEnhancer = focused || domainName.length > 0;
 
-	const { isLoading, isDomainSearchEnabled, isDomainAvailable, domainPrice } =
-		useDomainAvailability();
+	const {
+		isLoading: isCheckingDomainAvailability,
+		isDomainSearchEnabled,
+		isDomainAvailable,
+		domainPrice,
+	} = useDomainAvailability();
+
+	const isDomainPriceExpensive =
+		isDomainSearchEnabled &&
+		domainPrice &&
+		balance &&
+		Number(domainPrice) > Number(balance);
+
+	const isLoading =
+		isCheckingDomainAvailability || (isLoadingBalance && !balance);
 
 	const handleOnChange = (value: string) => {
 		let correctValue = value;
@@ -53,7 +71,9 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 		>
 			<Button
 				isLoading={isLoading}
-				isDisabled={!isDomainSearchEnabled || !isDomainAvailable}
+				isDisabled={
+					!isDomainSearchEnabled || !isDomainAvailable || isDomainPriceExpensive
+				}
 				onPress={handleOnBuyButtonClick}
 			>
 				Buy
@@ -81,7 +101,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 					endEnhancer={
 						<div className={styles.EndEnhancer}>
 							{isLoading ? (
-								<LoadingIndicator text="" />
+								<LoadingIndicator />
 							) : type === 'default' ? (
 								buyDomainButton()
 							) : null}
@@ -102,6 +122,16 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 						? `Domain available for ${domainPrice} ZERO. No renewal fee, ever.`
 						: 'Someone already explored that part of the universe, try again...')}
 			</div>
+
+			{isDomainPriceExpensive && (
+				<div className={cx(styles.Section, styles.BalanceWarningSection)}>
+					You just need to
+					<a href={URLS.UNI_SWAP_ZERO} target="_blank">
+						Buy $ZERO
+					</a>
+					to secure this domain
+				</div>
+			)}
 
 			{type === 'alternative' && buyDomainButton()}
 		</div>

@@ -15,7 +15,11 @@ const App = ({ provider, web3, route, user }: AppProps) => {
 				<QueryClientProvider client={queryClient}>
 					<ZUIProvider>
 						<BuyDomainProvider>
-							<BuyDomain user={user} provider={provider} />
+							<BuyDomain
+								user={user}
+								provider={provider}
+								chainId={web3.chainId}
+							/>
 						</BuyDomainProvider>
 					</ZUIProvider>
 				</QueryClientProvider>

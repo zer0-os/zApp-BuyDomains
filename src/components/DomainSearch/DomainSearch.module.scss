@@ -52,6 +52,17 @@
 				color: colors.$grey-lighter-2;
 			}
 		}
+
+		&.BalanceWarningSection {
+			justify-content: center;
+			align-items: center;
+			gap: 0.5rem;
+			margin: 1rem 0 2rem;
+
+			> a {
+				color: colors.$blue;
+			}
+		}
 	}
 
 	.BuyButton {

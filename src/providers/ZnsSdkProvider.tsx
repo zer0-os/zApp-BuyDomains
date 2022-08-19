@@ -1,8 +1,8 @@
 import type { FC } from 'react';
+import type { AppProps } from '../types';
 
 import { createContext, useMemo } from 'react';
 import * as zns from '@zero-tech/zns-sdk';
-import { providers } from 'ethers';
 import {
 	DEFAULT_NETWORK,
 	DEFAULT_PROVIDER,
@@ -11,8 +11,8 @@ import {
 import { chainIdToNetworkType } from '../helpers/network';
 
 type ZnsSdkProviderProps = {
-	provider?: providers.Web3Provider;
-	chainId?: number;
+	provider: AppProps['provider'];
+	chainId: AppProps['web3']['chainId'];
 };
 
 export const ZnsSdkContext = createContext({} as zns.Instance);

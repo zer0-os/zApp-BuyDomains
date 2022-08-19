@@ -9,13 +9,15 @@ import { BuyDomainStep, BUY_DOMAIN_STEPS } from '../../constants/domains';
 import { Discover, Approve, Mint, Success } from './elements';
 import styles from './BuyDomainModal.module.scss';
 
-export type BuyDomainModalProps = Pick<AppProps, 'user' | 'provider'> & {
-	onClose: () => void;
-};
+export type BuyDomainModalProps = Pick<AppProps, 'user' | 'provider'> &
+	Pick<AppProps['web3'], 'chainId'> & {
+		onClose: () => void;
+	};
 
 export const BuyDomainModal: FC<BuyDomainModalProps> = ({
 	user,
 	provider,
+	chainId,
 	onClose,
 }) => {
 	const [step, setStep] = useState<BuyDomainStep>(BuyDomainStep.Discover);
@@ -41,7 +43,11 @@ export const BuyDomainModal: FC<BuyDomainModalProps> = ({
 				/>
 
 				{step === BuyDomainStep.Discover && (
-					<Discover onNextStep={() => setStep(BuyDomainStep.Approve)} />
+					<Discover
+						user={user}
+						chainId={chainId}
+						onNextStep={() => setStep(BuyDomainStep.Approve)}
+					/>
 				)}
 
 				{step === BuyDomainStep.Approve && (

@@ -15,6 +15,11 @@ export enum NETWORK_TYPES {
 	KOVAN = 'KOVAN',
 }
 
+export const PAYMENT_TOKENS: Partial<Record<Network, string>> = {
+	[Network.MAINNET]: '0x0ec78ed49c2d27b315d462d43b5bab94d2c79bf8',
+	[Network.RINKEBY]: '0x5bAbCA2Af93A9887C86161083b8A90160DA068f2',
+};
+
 export const RPC_URLS: Partial<Record<Network, string>> = {
 	[Network.MAINNET]:
 		'https://mainnet.infura.io/v3/77c3d733140f4c12a77699e24cb30c27',
