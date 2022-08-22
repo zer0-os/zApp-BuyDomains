@@ -2,9 +2,8 @@ import type { FC } from 'react';
 import type { AppProps } from '../../types';
 
 import { useState } from 'react';
-import Wizard from 'zero-ui/src/components/Wizard';
-import Modal from 'zero-ui/src/components/Modal';
-import { StepBar } from 'zero-ui/src/components/StepBar';
+import { Wizard, Modal } from '@zero-tech/zui/components';
+import { StepBar } from '@zero-tech/zui/components/StepBar';
 import { BuyDomainStep, BUY_DOMAIN_STEPS } from '../../constants/domains';
 import { Discover, Approve, Mint, Success } from './elements';
 import styles from './BuyDomainModal.module.scss';

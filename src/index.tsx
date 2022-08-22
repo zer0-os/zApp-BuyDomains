@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
-import ZUIProvider from 'zero-ui/src/ZUIProvider';
+import ZUIProvider from '@zero-tech/zui/ZUIProvider';
 import ChainGate from './util/ChainGate';
 import { ZnsSdkProvider } from './providers/ZnsSdkProvider';
 import { BuyDomainProvider } from './providers/BuyDomainProvider';

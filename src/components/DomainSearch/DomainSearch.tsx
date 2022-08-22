@@ -2,9 +2,7 @@ import type { FC } from 'react';
 
 import { useState } from 'react';
 import classNames from 'classnames/bind';
-import Input from 'zero-ui/src/components/Input';
-import Button from 'zero-ui/src/components/Button';
-import LoadingIndicator from 'zero-ui/src/components/LoadingIndicator';
+import { Input, Button, LoadingIndicator } from '@zero-tech/zui/components';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../constants/network';
 import { URLS } from '../../constants/urls';
 import { useBuyDomain, useDomainAvailability } from '../../hooks';

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import Button from 'zero-ui/src/components/Button';
+import { Button } from '@zero-tech/zui/components';
 import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { useBuyDomain } from '../../../hooks';
 import { DOMAIN_TWEET_OPTION } from '../../../constants/domains';

@@ -2,8 +2,7 @@ import type { FC } from 'react';
 import type { BuyDomainModalProps } from '../BuyDomainModal';
 
 import { useState, useEffect, useCallback } from 'react';
-import Wizard from 'zero-ui/src/components/Wizard';
-import { Tooltip } from 'zero-ui/src/components/Tooltip';
+import { Wizard, Tooltip } from '@zero-tech/zui/components';
 import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { QuestionButton } from '../../QuestionButton';
 import { useZnsSdk } from '../../../hooks/useZnsSdk';

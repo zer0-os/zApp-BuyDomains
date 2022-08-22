@@ -9,7 +9,7 @@ module.exports = {
 		{
 			plugin: require('craco-babel-loader'),
 			options: {
-				includes: [resolveApp('../zUI')],
+				includes: [], // [resolveApp('../zUI')],
 			},
 		},
 	],
