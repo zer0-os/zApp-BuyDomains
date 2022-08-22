@@ -50,7 +50,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 	const handleOnChange = (value: string) => {
 		let correctValue = value;
 		correctValue = correctValue
-			.replace(DEFAULT_NETWORK_PROTOCAL, '')
+			.toLowerCase()
 			.replace(/[^a-z0-9]/g, '')
 			.replace(/\s+/g, '');
 
