@@ -17,7 +17,7 @@ export enum NETWORK_TYPES {
 
 export const PAYMENT_TOKENS: Partial<Record<Network, string>> = {
 	[Network.MAINNET]: '0x0ec78ed49c2d27b315d462d43b5bab94d2c79bf8',
-	[Network.RINKEBY]: '0x5bAbCA2Af93A9887C86161083b8A90160DA068f2',
+	[Network.RINKEBY]: '0x3Ae5d499cfb8FB645708CC6DA599C90e64b33A79',
 };
 
 export const RPC_URLS: Partial<Record<Network, string>> = {

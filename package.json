@@ -1,5 +1,5 @@
 {
-  "name": "@zer0-os/buy-domains-zapp",
+  "name": "@zero-tech/buy-domains-zapp",
   "version": "0.1.0",
   "description": "zApp for purchasing Zero namespace",
   "main": "dist/index.js",
