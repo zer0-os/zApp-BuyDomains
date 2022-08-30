@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@zero-tech/zui/components';
 import { DefaultDomainMedia } from './DefaultDomainMedia';
@@ -11,7 +12,14 @@ import styles from '../BuyDomainModal.module.scss';
 export const Success: FC = () => {
 	const history = useHistory();
 
-	const { domainName } = useBuyDomain();
+	const { domainName, setDomainName } = useBuyDomain();
+
+	useEffect(() => {
+		return () => {
+			// reset domain
+			setDomainName('');
+		};
+	}, []);
 
 	const handleOnTweet = () => {
 		// TODO: Should handle sharing on Twitter with zOS
