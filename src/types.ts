@@ -6,8 +6,6 @@ export interface AppProps {
 	web3: {
 		chainId: number;
 		address: string;
-	};
-	user: {
-		account: string;
+		connectWallet;
 	};
 }

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ZnsSdkContext } from '../providers/ZnsSdkProvider';
+import { ZnsSdkContext } from '../providers';
 
 /**
  * Wraps useContext in a more specific wrapper.

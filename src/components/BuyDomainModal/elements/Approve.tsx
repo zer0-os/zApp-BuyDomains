@@ -1,11 +1,10 @@
 import type { FC } from 'react';
-import type { BuyDomainModalProps } from '../BuyDomainModal';
 
 import { useState, useEffect, useCallback } from 'react';
 import { Wizard, Tooltip } from '@zero-tech/zui/components';
 import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { QuestionButton } from '../../QuestionButton';
-import { useZnsSdk } from '../../../hooks/useZnsSdk';
+import { useZnsSdk, useWeb3 } from '../../../hooks';
 import styles from '../BuyDomainModal.module.scss';
 
 enum ApproveStep {
@@ -15,17 +14,13 @@ enum ApproveStep {
 	Approving = 'Approving',
 }
 
-type ApproveProps = Pick<BuyDomainModalProps, 'user' | 'provider'> & {
+type ApproveProps = {
 	onPrevStep: () => void;
 	onNextStep: () => void;
 };
 
-export const Approve: FC<ApproveProps> = ({
-	user,
-	provider,
-	onPrevStep,
-	onNextStep,
-}) => {
+export const Approve: FC<ApproveProps> = ({ onPrevStep, onNextStep }) => {
+	const { account, provider } = useWeb3();
 	const sdk = useZnsSdk();
 
 	const [step, setStep] = useState<ApproveStep>(ApproveStep.Checking);
@@ -40,7 +35,7 @@ export const Approve: FC<ApproveProps> = ({
 
 		try {
 			const isApproved = await sdk.minting.isMinterApprovedToSpendTokens(
-				user.account,
+				account,
 			);
 
 			if (isApproved) {
@@ -52,7 +47,7 @@ export const Approve: FC<ApproveProps> = ({
 			setErrror(e.message);
 			setStep(ApproveStep.UnApproved);
 		}
-	}, [user, sdk, setStep, onNextStep]);
+	}, [account, sdk, setStep, onNextStep]);
 
 	const approveSpendTokens = useCallback(async () => {
 		setStep(ApproveStep.ApproveConfirm);

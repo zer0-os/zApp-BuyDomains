@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { BuyDomainContext } from '../providers/BuyDomainProvider';
+import { BuyDomainContext } from '../providers';
 
 export const useBuyDomain = () => {
 	const context = useContext(BuyDomainContext);

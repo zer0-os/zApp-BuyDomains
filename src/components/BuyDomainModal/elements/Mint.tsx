@@ -1,13 +1,11 @@
 import type { FC } from 'react';
-import type { BuyDomainModalProps } from '../BuyDomainModal';
 
 import { useState, useEffect, useCallback } from 'react';
 import { Wizard, Tooltip } from '@zero-tech/zui/components';
 import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { DomainSearch } from '../../DomainSearch';
 import { QuestionButton } from '../../QuestionButton';
-import { useZnsSdk } from '../../../hooks/useZnsSdk';
-import { useBuyDomain } from '../../../hooks';
+import { useBuyDomain, useWeb3, useZnsSdk } from '../../../hooks';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../../constants/network';
 import styles from '../BuyDomainModal.module.scss';
 
@@ -17,11 +15,12 @@ enum MintStep {
 	Minting = 'Minting',
 }
 
-type MintProps = Pick<BuyDomainModalProps, 'provider'> & {
+type MintProps = {
 	onNextStep: () => void;
 };
 
-export const Mint: FC<MintProps> = ({ provider, onNextStep }) => {
+export const Mint: FC<MintProps> = ({ onNextStep }) => {
+	const { provider } = useWeb3();
 	const sdk = useZnsSdk();
 	const { domainName } = useBuyDomain();
 

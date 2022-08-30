@@ -1,30 +1,32 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ZUIProvider from '@zero-tech/zui/ZUIProvider';
-import ChainGate from './util/ChainGate';
-import { ZnsSdkProvider } from './providers/ZnsSdkProvider';
-import { BuyDomainProvider } from './providers/BuyDomainProvider';
+import { ChainGate } from './util/ChainGate';
+import { ZnsSdkProvider, BuyDomainProvider, Web3Provider } from './providers';
 import { AppProps } from './types';
 import { BuyDomain } from './pages';
 
 const queryClient = new QueryClient();
 
-const App = ({ provider, web3, route, user }: AppProps) => {
+const App = ({ provider, web3 }: AppProps) => {
 	return (
-		<ChainGate chainId={web3.chainId}>
-			<ZnsSdkProvider chainId={web3.chainId} provider={provider}>
-				<QueryClientProvider client={queryClient}>
-					<ZUIProvider>
-						<BuyDomainProvider>
-							<BuyDomain
-								user={user}
-								provider={provider}
-								chainId={web3.chainId}
-							/>
-						</BuyDomainProvider>
-					</ZUIProvider>
-				</QueryClientProvider>
-			</ZnsSdkProvider>
-		</ChainGate>
+		<QueryClientProvider client={queryClient}>
+			<Web3Provider
+				provider={provider}
+				account={web3.address}
+				chainId={web3.chainId}
+				connectWallet={web3.connectWallet}
+			>
+				<ChainGate>
+					<ZnsSdkProvider>
+						<ZUIProvider>
+							<BuyDomainProvider>
+								<BuyDomain />
+							</BuyDomainProvider>
+						</ZUIProvider>
+					</ZnsSdkProvider>
+				</ChainGate>
+			</Web3Provider>
+		</QueryClientProvider>
 	);
 };
 

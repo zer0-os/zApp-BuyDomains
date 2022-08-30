@@ -1,14 +1,18 @@
 import type { FC } from 'react';
-import type { AppProps } from '../../types';
 
 import { useState } from 'react';
-import { IconZero, DomainSearch, BuyDomainModal } from '../../components';
+import {
+	IconZero,
+	DomainSearch,
+	BuyDomainModal,
+	ConnectWallet,
+} from '../../components';
+import { useWeb3 } from '../../hooks';
 import styles from './BuyDomain.module.scss';
 
-type BuyDomainProps = Pick<AppProps, 'user' | 'provider'> &
-	Pick<AppProps['web3'], 'chainId'>;
+export const BuyDomain: FC = () => {
+	const { account } = useWeb3();
 
-export const BuyDomain: FC<BuyDomainProps> = ({ user, provider, chainId }) => {
 	const [buyDomainModal, setBuyDomainModal] = useState<{
 		isOpen;
 		domainName;
@@ -31,6 +35,18 @@ export const BuyDomain: FC<BuyDomainProps> = ({ user, provider, chainId }) => {
 		});
 	};
 
+	if (!account) {
+		return (
+			<div className={styles.Container}>
+				<div className={styles.Wrapper}>
+					<ConnectWallet
+						message={'Connect a Web3 wallet to see your Buy Domains data.'}
+					/>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<>
 			<div className={styles.Container}>
@@ -46,14 +62,7 @@ export const BuyDomain: FC<BuyDomainProps> = ({ user, provider, chainId }) => {
 				</div>
 			</div>
 
-			{buyDomainModal.isOpen && (
-				<BuyDomainModal
-					user={user}
-					provider={provider}
-					chainId={chainId}
-					onClose={handleOnModalClose}
-				/>
-			)}
+			{buyDomainModal.isOpen && <BuyDomainModal onClose={handleOnModalClose} />}
 		</>
 	);
 };

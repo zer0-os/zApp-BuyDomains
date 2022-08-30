@@ -1,18 +1,19 @@
 import type { FC } from 'react';
-import type { BuyDomainModalProps } from '../BuyDomainModal';
 
 import { DefaultDomainMedia } from './DefaultDomainMedia';
 import { DomainSearch } from '../../DomainSearch';
-import { useUserBalanceForPaymentTokenByDomain } from '../../../hooks';
+import { useUserBalanceForPaymentTokenByDomain, useWeb3 } from '../../../hooks';
 import styles from '../BuyDomainModal.module.scss';
 
-type DiscoverProps = Pick<BuyDomainModalProps, 'user' | 'chainId'> & {
+type DiscoverProps = {
 	onNextStep: () => void;
 };
 
-export const Discover: FC<DiscoverProps> = ({ user, chainId, onNextStep }) => {
+export const Discover: FC<DiscoverProps> = ({ onNextStep }) => {
+	const { account, chainId } = useWeb3();
+
 	const { isLoading, balance } = useUserBalanceForPaymentTokenByDomain(
-		user.account,
+		account,
 		chainId,
 	);
 

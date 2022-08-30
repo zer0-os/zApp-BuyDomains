@@ -1,0 +1,16 @@
+.Container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+
+	p {
+		padding: 0 1rem 1rem 1rem;
+	}
+
+	> * {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}

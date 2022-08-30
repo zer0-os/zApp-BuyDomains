@@ -1,27 +1,16 @@
 import type { FC } from 'react';
-import type { AppProps } from '../types';
 
 import { createContext, useMemo } from 'react';
 import * as zns from '@zero-tech/zns-sdk';
-import {
-	DEFAULT_NETWORK,
-	DEFAULT_PROVIDER,
-	NETWORK_TYPES,
-} from '../constants/network';
+import { DEFAULT_NETWORK, NETWORK_TYPES } from '../constants/network';
+import { useWeb3 } from '../hooks';
 import { chainIdToNetworkType } from '../helpers/network';
-
-type ZnsSdkProviderProps = {
-	provider: AppProps['provider'];
-	chainId: AppProps['web3']['chainId'];
-};
 
 export const ZnsSdkContext = createContext({} as zns.Instance);
 
-export const ZnsSdkProvider: FC<ZnsSdkProviderProps> = ({
-	provider = DEFAULT_PROVIDER,
-	chainId,
-	children,
-}) => {
+export const ZnsSdkProvider: FC = ({ children }) => {
+	const { provider, chainId } = useWeb3();
+
 	const sdk = useMemo(() => {
 		/**
 		 * Use connected wallet's provider if it exists, otherwise create
