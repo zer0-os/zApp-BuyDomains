@@ -25,11 +25,11 @@ export const Mint: FC<MintProps> = ({ onNextStep }) => {
 	const { domainName } = useBuyDomain();
 
 	const [step, setStep] = useState<MintStep>(MintStep.MintConfirm);
-	const [error, setErrror] = useState<string>();
+	const [error, setError] = useState<string>();
 
 	const mintDomain = useCallback(async () => {
 		setStep(MintStep.MintConfirm);
-		setErrror(undefined);
+		setError(undefined);
 
 		try {
 			const tx = await sdk.minting.mintNetworkDomain(
@@ -42,12 +42,12 @@ export const Mint: FC<MintProps> = ({ onNextStep }) => {
 				await tx.wait();
 				onNextStep();
 			} catch (e: any) {
-				setErrror(e.message);
+				setError(e.message);
 				setStep(MintStep.MintConfirmDenied);
 			}
 		} catch (e: any) {
 			// TODO:: SDK does not return 4001 code for transaction reject
-			setErrror(
+			setError(
 				e.message === 'User rejected transaction.'
 					? 'Transaction denied by wallet. Please try again...'
 					: e.message,

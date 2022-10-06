@@ -24,7 +24,7 @@ export const Approve: FC<ApproveProps> = ({ onPrevStep, onNextStep }) => {
 	const sdk = useZnsSdk();
 
 	const [step, setStep] = useState<ApproveStep>(ApproveStep.Checking);
-	const [error, setErrror] = useState<string>();
+	const [error, setError] = useState<string>();
 
 	const checkSpendTokens = useCallback(async () => {
 		setStep(ApproveStep.Checking);
@@ -44,14 +44,14 @@ export const Approve: FC<ApproveProps> = ({ onPrevStep, onNextStep }) => {
 				setStep(ApproveStep.UnApproved);
 			}
 		} catch (e: any) {
-			setErrror(e.message);
+			setError(e.message);
 			setStep(ApproveStep.UnApproved);
 		}
 	}, [account, sdk, setStep, onNextStep]);
 
 	const approveSpendTokens = useCallback(async () => {
 		setStep(ApproveStep.ApproveConfirm);
-		setErrror(undefined);
+		setError(undefined);
 
 		try {
 			const tx = await sdk.minting.approveMinterToSpendTokens(
@@ -63,11 +63,11 @@ export const Approve: FC<ApproveProps> = ({ onPrevStep, onNextStep }) => {
 				await tx.wait();
 				onNextStep();
 			} catch (e: any) {
-				setErrror(e.message);
+				setError(e.message);
 				setStep(ApproveStep.UnApproved);
 			}
 		} catch (e: any) {
-			setErrror(e.code === 4001 ? 'Approval rejected by wallet.' : e.message);
+			setError(e.code === 4001 ? 'Approval rejected by wallet.' : e.message);
 			setStep(ApproveStep.UnApproved);
 		}
 	}, [provider, sdk, setStep, onNextStep]);
