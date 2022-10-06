@@ -1,11 +1,26 @@
-# Buy Domains dApp
+# BuyDomains dApp
 
-A zApp for purchasing namespace in the Zero ecosystem.
+This is the BuyDomains zApp.
 
 ## Running Locally
 
-_This project is in the early stages of development - dx may be lacking._
+This zApp is designed to run in the context of [zOS](https://github.com/zer0-os/zOS).
 
-This package exports a component - in order to work on this zApp you will have to import the component (through `npm link`) to a container app and render it with the required props. It is intended to run in the context of [zNS-dapp](https://github.com/zer0-os/zNS-dapp) and [zOS](https://github.com/zer0-os/zOS), so we recommend using either of these apps as the container for the time being.
+You will need to run `npm run watch`, and link the output folder (`dist`) to your local instance of [zOS](https://github.com/zer0-os/zOS).
 
-Further documentation is on the way. 
+1. `nvm use`
+2. `npm i`
+3. `npm run watch`
+
+At this point, you should see a `dist` folder. This is the compiled version of your app. If you wish to import this into [zOS](https://github.com/zer0-os/zOS), you will need to do the following:
+
+4. `npm run link [location of zOS, e.g. ../zOS]`
+
+or, if the above script doesn't work for you:
+
+4. `cd dist`
+5. `npm link`
+6. `cd [location of zOS]`
+7. `npm link [package name of this zApp from package.json]`
+
+Check `node_modules` in [zOS](https://github.com/zer0-os/zOS) - your package folder should be symlinked in there.

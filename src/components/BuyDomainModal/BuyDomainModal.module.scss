@@ -1,6 +1,6 @@
-@use '@zero-tech/zui/styles/dimensions';
-@use '@zero-tech/zui/styles/colors';
-@use '@zero-tech/zui/styles/typography';
+@import '../../../node_modules/@zero-tech/zui/styles/_colors.scss';
+@import '../../../node_modules/@zero-tech/zui/styles/_dimensions.scss';
+@import '../../../node_modules/@zero-tech/zui/styles/_typography.scss';
 
 .Modal {
 	padding: unset;
@@ -69,12 +69,12 @@
 
 				.DomainName {
 					font-size: 3rem;
-					font-weight: typography.$font-weight-bold;
+					font-weight: $font-weight-bold;
 					line-height: 3.625rem;
 					text-align: center;
 
 					> span {
-						color: colors.$grey;
+						color: $grey;
 					}
 				}
 
@@ -83,7 +83,7 @@
 
 					> p {
 						margin: 2.5rem 0;
-						color: colors.$success-green;
+						color: $success-green;
 					}
 
 					.Buttons {
@@ -94,14 +94,11 @@
 					}
 				}
 
-
-
 				:global(.error-text) {
 					margin-bottom: unset;
-					color: colors.$red-300;
+					color: $red-300;
 				}
 			}
 		}
 	}
 }
-
