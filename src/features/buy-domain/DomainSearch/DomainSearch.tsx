@@ -128,7 +128,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 			{type === 'alternative' && (
 				<BuyDomainButton
 					type={type}
-					isDisabled={false}
+					isDisabled={isDisabled}
 					isLoading={isLoading}
 					onClickBuy={onClickBuy}
 				/>
