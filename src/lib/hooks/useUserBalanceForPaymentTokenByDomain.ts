@@ -31,13 +31,13 @@ export const useUserBalanceForPaymentTokenByDomain = (
 		`user-balance-token-${account}-${selectedDomain.toLowerCase()}-${paymentToken}`,
 		async () => {
 			try {
-				const balanceBignumber =
+				const balanceAsBigNumber =
 					await sdk.zauction.getUserBalanceForPaymentToken(
 						account,
 						paymentToken,
 					);
 
-				return formatEther(balanceBignumber);
+				return formatEther(balanceAsBigNumber);
 			} catch (error) {
 				console.error(error);
 				return undefined;
