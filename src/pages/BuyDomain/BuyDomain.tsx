@@ -1,38 +1,28 @@
 import type { FC } from 'react';
-
 import { useState } from 'react';
-import {
-	IconZero,
-	DomainSearch,
-	BuyDomainModal,
-	ConnectWallet,
-} from '../../components';
-import { useWeb3 } from '../../hooks';
+
+import { useWeb3 } from '../../lib/hooks';
+
+import { ConnectWallet } from '../../features/ui/ConnectWallet';
+import { IconZero } from '../../features/buy-domain/Icons';
+import { DomainSearch } from '../../features/buy-domain/DomainSearch';
+import { BuyDomainModal } from '../../features/buy-domain/BuyDomainModal';
+
 import styles from './BuyDomain.module.scss';
 
 export const BuyDomain: FC = () => {
 	const { account } = useWeb3();
 
-	const [buyDomainModal, setBuyDomainModal] = useState<{
-		isOpen;
-		domainName;
-	}>({
-		isOpen: false,
-		domainName: '',
-	});
+	const [domainToPurchase, setDomainToPurchase] = useState<
+		string | undefined
+	>();
 
-	const handleOnBuyButtonClick = (domainName) => {
-		setBuyDomainModal({
-			isOpen: true,
-			domainName,
-		});
+	const onBuyButtonClick = (domainToPurchase: string) => {
+		setDomainToPurchase(domainToPurchase);
 	};
 
-	const handleOnModalClose = () => {
-		setBuyDomainModal({
-			...buyDomainModal,
-			isOpen: false,
-		});
+	const onModalClose = () => {
+		setDomainToPurchase(undefined);
 	};
 
 	if (!account) {
@@ -57,14 +47,15 @@ export const BuyDomain: FC = () => {
 					</div>
 
 					<div className={styles.Content}>
-						<DomainSearch onBuyButtonClick={handleOnBuyButtonClick} />
+						<DomainSearch onBuyButtonClick={onBuyButtonClick} />
 					</div>
 				</div>
 			</div>
 
-			{buyDomainModal.isOpen && <BuyDomainModal onClose={handleOnModalClose} />}
+			<BuyDomainModal
+				open={domainToPurchase !== undefined}
+				onClose={onModalClose}
+			/>
 		</>
 	);
 };
-
-export default BuyDomain;

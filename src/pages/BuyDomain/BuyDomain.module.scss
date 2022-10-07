@@ -1,14 +1,13 @@
-@use '@zero-tech/zui/styles/dimensions';
-@use '@zero-tech/zui/styles/colors';
-@use '@zero-tech/zui/styles/typography';
-
+@import '../../../node_modules/@zero-tech/zui/styles/_colors.scss';
+@import '../../../node_modules/@zero-tech/zui/styles/_dimensions.scss';
+@import '../../../node_modules/@zero-tech/zui/styles/_typography.scss';
 
 .Container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: calc(100% - 45px);
-	
+
 	.Wrapper {
 		display: flex;
 		flex-direction: column;
@@ -21,11 +20,11 @@
 			display: flex;
 			align-items: center;
 			gap: 24px;
-	
+
 			h1 {
-				color: colors.$text-primary;
+				color: $text-primary;
 				font-size: 2rem;
-				font-weight: typography.$font-weight-regular;
+				font-weight: $font-weight-regular;
 				line-height: 39px;
 				letter-spacing: 0.2em;
 				text-transform: uppercase;
@@ -35,35 +34,35 @@
 		.Content {
 			width: 100%;
 			margin-top: 2rem;
-	
+
 			.Section {
 				display: flex;
 				justify-content: space-between;
 				gap: 1rem;
-		
+
 				.Input {
 					flex: 1;
 					max-width: 550px;
-	
+
 					> input {
 						width: 100%;
 						height: 100%;
 					}
 				}
-	
+
 				&.DescriptionSection {
 					display: flex;
 					justify-content: center;
 					align-items: center;
 					margin-top: 1rem;
-	
+
 					&.Valid {
-						color: colors.$success-green;
+						color: $success-green;
 					}
-	
+
 					&.Invalid {
 						color: red;
-						color: colors.$grey-lighter-2;
+						color: $grey-lighter-2;
 					}
 				}
 			}
