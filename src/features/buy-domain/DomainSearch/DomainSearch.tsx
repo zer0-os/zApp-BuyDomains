@@ -1,18 +1,19 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 
-import { useBuyDomain, useDomainAvailability } from '../../lib/hooks';
-import { DEFAULT_NETWORK_PROTOCAL } from '../../lib/constants/network';
-import { URLS } from '../../lib/constants/urls';
+import { useBuyDomain, useDomainAvailability } from '../../../lib/hooks';
+import { DEFAULT_NETWORK_PROTOCAL } from '../../../lib/constants/network';
+import { URLS } from '../../../lib/constants/urls';
 
 import { Input, Button, LoadingIndicator } from '@zero-tech/zui/components';
 
 import classNames from 'classnames/bind';
 import styles from './DomainSearch.module.scss';
+import { BuyDomainButton } from '../BuyDomainButton';
 
 const cx = classNames.bind(styles);
 
-type DomainSearchTypes = 'default' | 'alternative' | 'nobutton';
+export type DomainSearchTypes = 'default' | 'alternative' | 'nobutton';
 
 type DomainSearchProps = {
 	type?: DomainSearchTypes;
@@ -49,6 +50,9 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 	const isLoading =
 		isCheckingDomainAvailability || (isLoadingBalance && !balance);
 
+	const isDisabled =
+		!isDomainSearchEnabled || !isDomainAvailable || isInsufficientBalance;
+
 	const onChange = (value: string) => {
 		let correctValue = value;
 		correctValue = correctValue
@@ -62,24 +66,6 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 	const onClickBuy = () => {
 		onBuyButtonClick?.(selectedDomain);
 	};
-
-	const buyDomainButton = () => (
-		<div
-			className={cx(styles.BuyButton, {
-				Alternative: type === 'alternative',
-			})}
-		>
-			<Button
-				isLoading={isLoading}
-				isDisabled={
-					!isDomainSearchEnabled || !isDomainAvailable || isInsufficientBalance
-				}
-				onPress={onClickBuy}
-			>
-				Buy
-			</Button>
-		</div>
-	);
 
 	return (
 		<div className={styles.Container}>
@@ -104,7 +90,12 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 							{isLoading ? (
 								<LoadingIndicator />
 							) : type === 'default' ? (
-								buyDomainButton()
+								<BuyDomainButton
+									type={type}
+									isDisabled={isDisabled}
+									isLoading={isLoading}
+									onClickBuy={onClickBuy}
+								/>
 							) : null}
 						</div>
 					}
@@ -134,7 +125,14 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 				</div>
 			)}
 
-			{type === 'alternative' && buyDomainButton()}
+			{type === 'alternative' && (
+				<BuyDomainButton
+					type={type}
+					isDisabled={false}
+					isLoading={isLoading}
+					onClickBuy={onClickBuy}
+				/>
+			)}
 		</div>
 	);
 };

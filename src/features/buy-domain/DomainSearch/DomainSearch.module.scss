@@ -1,5 +1,5 @@
-@import '../../../node_modules/@zero-tech/zui/styles/_colors.scss';
-@import '../../../node_modules/@zero-tech/zui/styles/_dimensions.scss';
+@import '../../../../node_modules/@zero-tech/zui/styles/_colors.scss';
+@import '../../../../node_modules/@zero-tech/zui/styles/_dimensions.scss';
 
 .Container {
 	.Section {
@@ -62,15 +62,6 @@
 			> a {
 				color: $blue;
 			}
-		}
-	}
-
-	.BuyButton {
-		&.Alternative {
-			margin-top: 1rem;
-			display: flex;
-			justify-content: center;
-			align-items: center;
 		}
 	}
 }

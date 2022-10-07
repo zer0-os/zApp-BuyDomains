@@ -6,7 +6,7 @@ import {
 } from '../../../../lib/hooks';
 
 import { DefaultDomainMedia } from '.';
-import { DomainSearch } from '../../../domain-search/DomainSearch';
+import { DomainSearch } from '../../../../features/buy-domain/DomainSearch';
 
 import styles from '../BuyDomainModal.module.scss';
 
