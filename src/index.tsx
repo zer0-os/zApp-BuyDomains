@@ -7,7 +7,7 @@ import { BuyDomain } from './pages';
 
 const queryClient = new QueryClient();
 
-export const App = ({ provider, web3 }: AppProps) => {
+export const BuyDomainsZApp = ({ provider, web3 }: AppProps) => {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Web3Provider
