@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useBuyDomain, useWeb3, useZnsSdk } from '../../../../lib/hooks';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../../../lib/constants/network';
 
-import { DefaultDomainMedia } from './DefaultDomainMedia';
+import { DefaultDomainMedia } from '.';
 import { DomainSearch } from '../../../domain-search/DomainSearch';
 import { QuestionButton } from '../../../ui/QuestionButton';
 import { Wizard, Tooltip } from '@zero-tech/zui/components';
