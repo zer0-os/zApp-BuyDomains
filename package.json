@@ -2,7 +2,11 @@
 	"name": "@zero-tech/zapp-buy-domains",
 	"version": "0.1.0",
 	"description": "zApp for purchasing Zero namespace",
-	"main": "dist/index.js",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zer0-os/zApp-BuyDomains.git"
+	},
 	"scripts": {
 		"clean": "rimraf dist && npx mkdirp dist",
 		"build": "npm-run-all clean build:*",
@@ -25,9 +29,6 @@
 	},
 	"author": "",
 	"license": "ISC",
-	"files": [
-		"dist"
-	],
 	"devDependencies": {
 		"@babel/cli": "^7.17.0",
 		"@babel/core": "^7.16.7",
