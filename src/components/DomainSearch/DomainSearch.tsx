@@ -38,7 +38,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 		domainPrice,
 	} = useDomainAvailability();
 
-	const isDomainPriceExpensive =
+	const isInsufficientBalance =
 		isDomainSearchEnabled &&
 		domainPrice &&
 		balance &&
@@ -70,7 +70,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 			<Button
 				isLoading={isLoading}
 				isDisabled={
-					!isDomainSearchEnabled || !isDomainAvailable || isDomainPriceExpensive
+					!isDomainSearchEnabled || !isDomainAvailable || isInsufficientBalance
 				}
 				onPress={handleOnBuyButtonClick}
 			>
@@ -122,7 +122,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 						: 'Someone already explored that part of the universe, try again...')}
 			</div>
 
-			{isDomainPriceExpensive && (
+			{isInsufficientBalance && (
 				<div className={cx(styles.Section, styles.BalanceWarningSection)}>
 					You just need to
 					<a href={URLS.UNI_SWAP_ZERO} target="_blank">
