@@ -6,10 +6,10 @@ import { useUserBalanceForPaymentTokenByDomain, useWeb3 } from '../../../hooks';
 import styles from '../BuyDomainModal.module.scss';
 
 type DiscoverProps = {
-	onNextStep: () => void;
+	onConfirm: () => void;
 };
 
-export const Discover: FC<DiscoverProps> = ({ onNextStep }) => {
+export const Discover: FC<DiscoverProps> = ({ onConfirm }) => {
 	const { account, chainId } = useWeb3();
 
 	const { isLoading, balance } = useUserBalanceForPaymentTokenByDomain(
@@ -22,7 +22,7 @@ export const Discover: FC<DiscoverProps> = ({ onNextStep }) => {
 			<DefaultDomainMedia />
 			<DomainSearch
 				type="alternative"
-				onBuyButtonClick={onNextStep}
+				onBuyButtonClick={onConfirm}
 				isLoadingBalance={isLoading}
 				balance={balance}
 			/>
