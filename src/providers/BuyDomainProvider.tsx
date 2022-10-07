@@ -3,16 +3,16 @@ import type { FC } from 'react';
 import { createContext, useState } from 'react';
 
 export const BuyDomainContext = createContext({
-	domainName: '',
-	setDomainName: (domainName: string) => {},
+	selectedDomain: '',
+	selectDomain: (selectedDomain: string) => {},
 });
 
 export const BuyDomainProvider: FC = ({ children }) => {
-	const [domainName, setDomainName] = useState<string>('');
+	const [selectedDomain, selectDomain] = useState<string>('');
 
 	const contextValue = {
-		domainName,
-		setDomainName,
+		selectedDomain,
+		selectDomain,
 	};
 
 	return (

@@ -13,26 +13,16 @@ import styles from './BuyDomain.module.scss';
 export const BuyDomain: FC = () => {
 	const { account } = useWeb3();
 
-	const [buyDomainModal, setBuyDomainModal] = useState<{
-		isOpen;
-		domainName;
-	}>({
-		isOpen: false,
-		domainName: '',
-	});
+	const [domainToPurchase, setDomainToPurchase] = useState<
+		string | undefined
+	>();
 
-	const handleOnBuyButtonClick = (domainName) => {
-		setBuyDomainModal({
-			isOpen: true,
-			domainName,
-		});
+	const handleOnBuyButtonClick = (domainToPurchase: string) => {
+		setDomainToPurchase(domainToPurchase);
 	};
 
 	const handleOnModalClose = () => {
-		setBuyDomainModal({
-			...buyDomainModal,
-			isOpen: false,
-		});
+		setDomainToPurchase(undefined);
 	};
 
 	if (!account) {
@@ -62,7 +52,10 @@ export const BuyDomain: FC = () => {
 				</div>
 			</div>
 
-			{buyDomainModal.isOpen && <BuyDomainModal onClose={handleOnModalClose} />}
+			<BuyDomainModal
+				open={domainToPurchase !== undefined}
+				onClose={handleOnModalClose}
+			/>
 		</>
 	);
 };
