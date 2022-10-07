@@ -27,14 +27,14 @@ export const useUserBalanceForPaymentTokenByDomain = (
 	const sdk = useZnsSdk();
 
 	// Domain Name
-	const { domainName } = useBuyDomain();
+	const { selectedDomain } = useBuyDomain();
 
 	// Payment Token
 	const paymentToken = PAYMENT_TOKENS[chainId];
 
 	// Query
 	const { isLoading, data: balance } = useQuery(
-		`user-balance-token-${account}-${domainName.toLowerCase()}-${paymentToken}`,
+		`user-balance-token-${account}-${selectedDomain.toLowerCase()}-${paymentToken}`,
 		async () => {
 			try {
 				const balanceBignumber =
@@ -53,7 +53,7 @@ export const useUserBalanceForPaymentTokenByDomain = (
 			retry: false,
 			refetchOnMount: false,
 			refetchOnWindowFocus: false,
-			enabled: Boolean(domainName.trim()),
+			enabled: Boolean(selectedDomain.trim()),
 		},
 	);
 

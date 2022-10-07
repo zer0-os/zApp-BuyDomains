@@ -12,18 +12,18 @@ import styles from '../BuyDomainModal.module.scss';
 export const Success: FC = () => {
 	const history = useHistory();
 
-	const { domainName, setDomainName } = useBuyDomain();
+	const { selectedDomain, selectDomain } = useBuyDomain();
 
 	useEffect(() => {
 		return () => {
 			// reset domain
-			setDomainName('');
+			selectDomain('');
 		};
 	}, []);
 
 	const handleOnTweet = () => {
 		// TODO: Should handle sharing on Twitter with zOS
-		const shareURL = location.origin + '/' + domainName;
+		const shareURL = location.origin + '/' + selectedDomain;
 
 		window.open(
 			DOMAIN_TWEET_OPTION.URL.replace(/DOMAIN_URL/g, shareURL),
@@ -34,7 +34,7 @@ export const Success: FC = () => {
 
 	const handleOnViewDomain = () => {
 		// TODO: Should handle redirecting to domain with zOS
-		const pathname = '/' + domainName;
+		const pathname = '/' + selectedDomain;
 		history.push(pathname);
 	};
 
@@ -45,7 +45,7 @@ export const Success: FC = () => {
 			<div className={styles.WizardContentSection}>
 				<div className={styles.DomainName}>
 					<span>{DEFAULT_NETWORK_PROTOCAL}</span>
-					{domainName}
+					{selectedDomain}
 				</div>
 				<div className={styles.MintSuccess}>
 					<p>Domain successfully minted!</p>

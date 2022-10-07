@@ -12,22 +12,22 @@ export interface UseDomainAvailabilityReturn {
 
 export const useDomainAvailability = (): UseDomainAvailabilityReturn => {
 	const sdk = useZnsSdk();
-	const { domainName } = useBuyDomain();
+	const { selectedDomain } = useBuyDomain();
 
-	const isDomainSearchEnabled = domainName.length >= MIN_DOMAIN_NAME_LENGTH;
+	const isDomainSearchEnabled = selectedDomain.length >= MIN_DOMAIN_NAME_LENGTH;
 
 	// Query
 	const { isLoading, data: { isDomainAvailable, domainPrice } = {} } = useQuery(
-		`buy-domains-search-${domainName}`,
+		`buy-domains-search-${selectedDomain}`,
 		async () => {
 			try {
 				const isDomainAvailable = await sdk.minting.isNetworkDomainAvailable(
-					domainName,
+					selectedDomain,
 				);
 
 				if (isDomainAvailable) {
 					const domainPrice = await sdk.minting.getPriceOfNetworkDomain(
-						domainName,
+						selectedDomain,
 					);
 
 					return {

@@ -16,7 +16,7 @@ type DomainSearchProps = {
 	type?: DomainSearchTypes;
 	isLoadingBalance?: boolean;
 	balance?: string;
-	onBuyButtonClick?: (domainName: string) => void;
+	onBuyButtonClick?: (selectedDomain: string) => void;
 };
 
 export const DomainSearch: FC<DomainSearchProps> = ({
@@ -70,8 +70,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 			<Button
 				isLoading={isLoading}
 				isDisabled={
-					// !isDomainSearchEnabled || !isDomainAvailable || isDomainPriceExpensive
-					false
+					!isDomainSearchEnabled || !isDomainAvailable || isDomainPriceExpensive
 				}
 				onPress={handleOnBuyButtonClick}
 			>
