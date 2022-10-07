@@ -47,7 +47,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 	const isLoading =
 		isCheckingDomainAvailability || (isLoadingBalance && !balance);
 
-	const handleOnChange = (value: string) => {
+	const onChange = (value: string) => {
 		let correctValue = value;
 		correctValue = correctValue
 			.toLowerCase()
@@ -57,7 +57,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 		selectDomain(correctValue);
 	};
 
-	const handleOnBuyButtonClick = () => {
+	const onClickBuy = () => {
 		onBuyButtonClick?.(selectedDomain);
 	};
 
@@ -72,7 +72,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 				isDisabled={
 					!isDomainSearchEnabled || !isDomainAvailable || isInsufficientBalance
 				}
-				onPress={handleOnBuyButtonClick}
+				onPress={onClickBuy}
 			>
 				Buy
 			</Button>
@@ -91,7 +91,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 					value={selectedDomain}
 					onFocus={() => setFocused(true)}
 					onBlur={() => setFocused(false)}
-					onChange={handleOnChange}
+					onChange={onChange}
 					startEnhancer={
 						<div className={styles.StartEnhancer}>
 							{showStartEnhancer && DEFAULT_NETWORK_PROTOCAL}
