@@ -42,7 +42,7 @@
 		"@types/react": "^17.0.3",
 		"@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
 		"@zero-tech/zns-sdk": "0.8.9",
-		"@zero-tech/zui": "^0.1.3",
+		"@zero-tech/zui": "0.7.0",
 		"babel-jest": "^27.4.6",
 		"babel-plugin-transform-rename-import": "^2.3.0",
 		"concurrently": "^7.4.0",
