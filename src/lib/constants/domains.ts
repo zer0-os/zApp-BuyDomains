@@ -1,10 +1,10 @@
 export const MIN_DOMAIN_NAME_LENGTH = 4;
 
 export enum BuyDomainStep {
-	Discover,
-	Approve,
-	Mint,
-	Success,
+	Discover = 'Discover',
+	Approve = 'Approve',
+	Mint = 'Mint',
+	Success = 'Success',
 }
 
 export const BUY_DOMAIN_STEPS = [
