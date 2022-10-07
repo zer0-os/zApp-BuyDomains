@@ -54,5 +54,3 @@ export const BuyDomainModal: FC<BuyDomainModalProps> = ({ onClose }) => {
 		</Modal>
 	);
 };
-
-export default BuyDomainModal;

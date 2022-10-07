@@ -66,5 +66,3 @@ export const BuyDomain: FC = () => {
 		</>
 	);
 };
-
-export default BuyDomain;

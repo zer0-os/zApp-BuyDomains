@@ -2,6 +2,8 @@ import type { FC } from 'react';
 
 import React from 'react';
 import classNames from 'classnames/bind';
+
+//  TODO: add asset
 // import questionIcon from './assets/question.svg';
 import styles from './QuestionButton.module.scss';
 
@@ -26,5 +28,3 @@ export const QuestionButton: FC<QuestionButtonProps> = ({
 		</button>
 	);
 };
-
-export default QuestionButton;

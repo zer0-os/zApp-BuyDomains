@@ -86,7 +86,8 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 					className={cx(styles.Input, {
 						ShowStartEnhancer: showStartEnhancer,
 					})}
-					placeholder={!showStartEnhancer && 'Search for your domain...'}
+					// @TODO: !showStartEnhancer &&  caused error
+					placeholder={'Search for your domain...'}
 					value={domainName}
 					onFocus={() => setFocused(true)}
 					onBlur={() => setFocused(false)}
@@ -135,5 +136,3 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 		</div>
 	);
 };
-
-export default DomainSearch;
