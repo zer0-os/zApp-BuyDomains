@@ -8,10 +8,11 @@ import { Discover, Approve, Mint, Success } from './elements';
 import styles from './BuyDomainModal.module.scss';
 
 type BuyDomainModalProps = {
+	open: boolean;
 	onClose: () => void;
 };
 
-export const BuyDomainModal: FC<BuyDomainModalProps> = ({ onClose }) => {
+export const BuyDomainModal: FC<BuyDomainModalProps> = ({ open, onClose }) => {
 	const [step, setStep] = useState<BuyDomainStep>(BuyDomainStep.Discover);
 
 	const header =
@@ -20,7 +21,7 @@ export const BuyDomainModal: FC<BuyDomainModalProps> = ({ onClose }) => {
 			: 'Buy Your Domain';
 
 	return (
-		<Modal open onOpenChange={onClose} className={styles.Modal}>
+		<Modal open={open} onOpenChange={onClose} className={styles.Modal}>
 			<Wizard.Container
 				header={header}
 				subHeader="Secure your space on the Ethereum blockchain"

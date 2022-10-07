@@ -27,9 +27,9 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 }) => {
 	const [focused, setFocused] = useState<boolean>(false);
 
-	const { domainName, setDomainName } = useBuyDomain();
+	const { selectedDomain, selectDomain } = useBuyDomain();
 
-	const showStartEnhancer = focused || domainName.length > 0;
+	const showStartEnhancer = focused || selectedDomain.length > 0;
 
 	const {
 		isLoading: isCheckingDomainAvailability,
@@ -54,11 +54,11 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 			.replace(/[^a-z0-9]/g, '')
 			.replace(/\s+/g, '');
 
-		setDomainName(correctValue);
+		selectDomain(correctValue);
 	};
 
 	const handleOnBuyButtonClick = () => {
-		onBuyButtonClick?.(domainName);
+		onBuyButtonClick?.(selectedDomain);
 	};
 
 	const buyDomainButton = () => (
@@ -70,7 +70,8 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 			<Button
 				isLoading={isLoading}
 				isDisabled={
-					!isDomainSearchEnabled || !isDomainAvailable || isDomainPriceExpensive
+					// !isDomainSearchEnabled || !isDomainAvailable || isDomainPriceExpensive
+					false
 				}
 				onPress={handleOnBuyButtonClick}
 			>
@@ -88,7 +89,7 @@ export const DomainSearch: FC<DomainSearchProps> = ({
 					})}
 					// @TODO: !showStartEnhancer &&  caused error
 					placeholder={'Search for your domain...'}
-					value={domainName}
+					value={selectedDomain}
 					onFocus={() => setFocused(true)}
 					onBlur={() => setFocused(false)}
 					onChange={handleOnChange}
