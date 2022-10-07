@@ -17,11 +17,11 @@ export const BuyDomain: FC = () => {
 		string | undefined
 	>();
 
-	const handleOnBuyButtonClick = (domainToPurchase: string) => {
+	const onBuyButtonClick = (domainToPurchase: string) => {
 		setDomainToPurchase(domainToPurchase);
 	};
 
-	const handleOnModalClose = () => {
+	const onModalClose = () => {
 		setDomainToPurchase(undefined);
 	};
 
@@ -47,14 +47,14 @@ export const BuyDomain: FC = () => {
 					</div>
 
 					<div className={styles.Content}>
-						<DomainSearch onBuyButtonClick={handleOnBuyButtonClick} />
+						<DomainSearch onBuyButtonClick={onBuyButtonClick} />
 					</div>
 				</div>
 			</div>
 
 			<BuyDomainModal
 				open={domainToPurchase !== undefined}
-				onClose={handleOnModalClose}
+				onClose={onModalClose}
 			/>
 		</>
 	);
