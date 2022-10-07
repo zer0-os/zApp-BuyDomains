@@ -18,7 +18,7 @@ export const useDomainAvailability = (): UseDomainAvailabilityReturn => {
 
 	// Query
 	const { isLoading, data: { isDomainAvailable, domainPrice } = {} } = useQuery(
-		`buy-domains-search-${selectedDomain}`,
+		['buy-domains-search', selectedDomain],
 		async () => {
 			try {
 				const isDomainAvailable = await sdk.minting.isNetworkDomainAvailable(

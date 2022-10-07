@@ -28,7 +28,7 @@ export const useUserBalanceForPaymentTokenByDomain = (
 
 	// Query
 	const { isLoading, data: balance } = useQuery(
-		`user-balance-token-${account}-${selectedDomain.toLowerCase()}-${paymentToken}`,
+		['user-balance-token', account, selectedDomain.toLowerCase(), paymentToken],
 		async () => {
 			try {
 				const balanceAsBigNumber =
