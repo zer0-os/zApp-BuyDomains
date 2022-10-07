@@ -1,0 +1,67 @@
+@import '../../../../node_modules/@zero-tech/zui/styles/_colors.scss';
+@import '../../../../node_modules/@zero-tech/zui/styles/_dimensions.scss';
+
+.Container {
+	.Section {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+
+		.Input {
+			flex: 1;
+			max-width: 550px;
+
+			:global(.zui-input-wrapper) {
+				gap: 0.25rem;
+
+				:global(.zui-input-enhancer-start) {
+					.StartEnhancer {
+						color: $grey-lighter-2;
+					}
+				}
+
+				:global(.zui-input-enhancer-end) {
+					padding-right: 0.5rem;
+
+					.EndEnhancer {
+						> * > * {
+							margin: unset;
+						}
+					}
+				}
+			}
+
+			input {
+				padding: 0.75rem 0 !important;
+				border-radius: unset !important;
+			}
+		}
+
+		&.DescriptionSection {
+			display: flex;
+			justify-content: center;
+			min-height: 2rem;
+			text-align: center;
+			margin-top: 1rem;
+
+			&.Valid {
+				color: $success-green;
+			}
+
+			&.Invalid {
+				color: $grey-lighter-2;
+			}
+		}
+
+		&.BalanceWarningSection {
+			justify-content: center;
+			align-items: center;
+			gap: 0.5rem;
+			margin: 1rem 0 2rem;
+
+			> a {
+				color: $blue;
+			}
+		}
+	}
+}
