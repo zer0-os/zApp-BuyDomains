@@ -10,9 +10,9 @@ import { DEFAULT_NETWORK_PROTOCAL } from '../../../constants/network';
 import styles from '../BuyDomainModal.module.scss';
 
 enum MintStep {
-	MintConfirm = 'MintConfirm',
-	MintConfirmDenied = 'MintConfirmDenied',
-	Minting = 'Minting',
+	MintConfirm,
+	MintConfirmDenied,
+	Minting,
 }
 
 type MintProps = {
@@ -22,7 +22,7 @@ type MintProps = {
 export const Mint: FC<MintProps> = ({ onNextStep }) => {
 	const { provider } = useWeb3();
 	const sdk = useZnsSdk();
-	const { domainName } = useBuyDomain();
+	const { selectedDomain } = useBuyDomain();
 
 	const [step, setStep] = useState<MintStep>(MintStep.MintConfirm);
 	const [error, setError] = useState<string>();
@@ -33,7 +33,7 @@ export const Mint: FC<MintProps> = ({ onNextStep }) => {
 
 		try {
 			const tx = await sdk.minting.mintNetworkDomain(
-				domainName,
+				selectedDomain,
 				provider.getSigner(),
 			);
 
@@ -88,7 +88,7 @@ export const Mint: FC<MintProps> = ({ onNextStep }) => {
 					<>
 						<div className={styles.DomainName}>
 							<span>{DEFAULT_NETWORK_PROTOCAL}</span>
-							{domainName}
+							{selectedDomain}
 						</div>
 						<div className={styles.Loading}>
 							<Wizard.Loading

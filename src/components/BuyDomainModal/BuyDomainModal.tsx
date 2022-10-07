@@ -36,7 +36,7 @@ export const BuyDomainModal: FC<BuyDomainModalProps> = ({ open, onClose }) => {
 				/>
 
 				{step === BuyDomainStep.Discover && (
-					<Discover onNextStep={() => setStep(BuyDomainStep.Approve)} />
+					<Discover onConfirm={() => setStep(BuyDomainStep.Approve)} />
 				)}
 
 				{step === BuyDomainStep.Approve && (
