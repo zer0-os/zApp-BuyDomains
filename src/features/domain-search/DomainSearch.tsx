@@ -1,11 +1,13 @@
 import type { FC } from 'react';
-
 import { useState } from 'react';
-import classNames from 'classnames/bind';
+
+import { useBuyDomain, useDomainAvailability } from '../../lib/hooks';
+import { DEFAULT_NETWORK_PROTOCAL } from '../../lib/constants/network';
+import { URLS } from '../../lib/constants/urls';
+
 import { Input, Button, LoadingIndicator } from '@zero-tech/zui/components';
-import { DEFAULT_NETWORK_PROTOCAL } from '../../constants/network';
-import { URLS } from '../../constants/urls';
-import { useBuyDomain, useDomainAvailability } from '../../hooks';
+
+import classNames from 'classnames/bind';
 import styles from './DomainSearch.module.scss';
 
 const cx = classNames.bind(styles);

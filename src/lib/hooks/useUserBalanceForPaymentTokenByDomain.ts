@@ -1,19 +1,13 @@
-//- React Imports
 import { useQuery } from 'react-query';
 
-//- Hooks Imports
 import { useZnsSdk } from './useZnsSdk';
 
-//- Constants Imports
-import { PAYMENT_TOKENS, DEFAULT_NETWORK } from '../constants/network';
-
-//- Hooks
 import { useBuyDomain } from './useBuyDomain';
 
-//- Utils
+import { PAYMENT_TOKENS, DEFAULT_NETWORK } from '../constants/network';
+
 import { formatEther } from '@ethersproject/units';
 
-//- Types
 export type UserBalanceForPaymentTokenByDomainReturn = {
 	isLoading: boolean;
 	balance?: string;

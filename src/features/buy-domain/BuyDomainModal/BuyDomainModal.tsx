@@ -1,10 +1,15 @@
 import type { FC } from 'react';
-
 import { useState } from 'react';
+
+import {
+	BuyDomainStep,
+	BUY_DOMAIN_STEPS,
+} from '../../../lib/constants/domains';
+
+import { Discover, Approve, Mint, Success } from './Elements';
 import { Wizard, Modal } from '@zero-tech/zui/components';
 import { StepBar } from '@zero-tech/zui/components/StepBar';
-import { BuyDomainStep, BUY_DOMAIN_STEPS } from '../../constants/domains';
-import { Discover, Approve, Mint, Success } from './elements';
+
 import styles from './BuyDomainModal.module.scss';
 
 type BuyDomainModalProps = {

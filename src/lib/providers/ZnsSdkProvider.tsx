@@ -1,10 +1,11 @@
 import type { FC } from 'react';
-
 import { createContext, useMemo } from 'react';
-import * as zns from '@zero-tech/zns-sdk';
+
 import { DEFAULT_NETWORK, NETWORK_TYPES } from '../constants/network';
 import { useWeb3 } from '../hooks';
 import { chainIdToNetworkType } from '../helpers/network';
+
+import * as zns from '@zero-tech/zns-sdk';
 
 export const ZnsSdkContext = createContext({} as zns.Instance);
 

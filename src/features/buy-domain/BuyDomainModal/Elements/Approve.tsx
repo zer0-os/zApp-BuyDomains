@@ -1,10 +1,12 @@
 import type { FC } from 'react';
-
 import { useState, useEffect, useCallback } from 'react';
+
+import { DefaultDomainMedia } from '.';
+import { QuestionButton } from '../../../ui/QuestionButton';
 import { Wizard, Tooltip } from '@zero-tech/zui/components';
-import { DefaultDomainMedia } from './DefaultDomainMedia';
-import { QuestionButton } from '../../QuestionButton';
-import { useZnsSdk, useWeb3 } from '../../../hooks';
+
+import { useZnsSdk, useWeb3 } from '../../../../lib/hooks';
+
 import styles from '../BuyDomainModal.module.scss';
 
 enum ApproveStep {

@@ -1,12 +1,14 @@
 import type { FC } from 'react';
-
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import { useBuyDomain } from '../../../../lib/hooks';
+import { DOMAIN_TWEET_OPTION } from '../../../../lib/constants/domains';
+import { DEFAULT_NETWORK_PROTOCAL } from '../../../../lib/constants/network';
+
+import { DefaultDomainMedia } from '.';
 import { Button } from '@zero-tech/zui/components';
-import { DefaultDomainMedia } from './DefaultDomainMedia';
-import { useBuyDomain } from '../../../hooks';
-import { DOMAIN_TWEET_OPTION } from '../../../constants/domains';
-import { DEFAULT_NETWORK_PROTOCAL } from '../../../constants/network';
+
 import styles from '../BuyDomainModal.module.scss';
 
 export const Success: FC = () => {

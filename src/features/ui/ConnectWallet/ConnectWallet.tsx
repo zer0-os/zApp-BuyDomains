@@ -1,8 +1,10 @@
+import React from 'react';
 import type { FC } from 'react';
 
-import React from 'react';
+import { useWeb3 } from '../../../lib/hooks';
+
 import { Button } from '@zero-tech/zui/components';
-import { useWeb3 } from '../../hooks';
+
 import styles from './ConnectWallet.module.scss';
 
 type ConnectWalletProps = {

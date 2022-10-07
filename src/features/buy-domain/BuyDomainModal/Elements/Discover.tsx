@@ -1,8 +1,13 @@
 import type { FC } from 'react';
 
-import { DefaultDomainMedia } from './DefaultDomainMedia';
-import { DomainSearch } from '../../DomainSearch';
-import { useUserBalanceForPaymentTokenByDomain, useWeb3 } from '../../../hooks';
+import {
+	useUserBalanceForPaymentTokenByDomain,
+	useWeb3,
+} from '../../../../lib/hooks';
+
+import { DefaultDomainMedia } from '.';
+import { DomainSearch } from '../../../domain-search/DomainSearch';
+
 import styles from '../BuyDomainModal.module.scss';
 
 type DiscoverProps = {

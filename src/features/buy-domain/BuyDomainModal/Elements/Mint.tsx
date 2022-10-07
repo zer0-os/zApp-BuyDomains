@@ -1,12 +1,14 @@
 import type { FC } from 'react';
-
 import { useState, useEffect, useCallback } from 'react';
-import { Wizard, Tooltip } from '@zero-tech/zui/components';
+
+import { useBuyDomain, useWeb3, useZnsSdk } from '../../../../lib/hooks';
+import { DEFAULT_NETWORK_PROTOCAL } from '../../../../lib/constants/network';
+
 import { DefaultDomainMedia } from './DefaultDomainMedia';
-import { DomainSearch } from '../../DomainSearch';
-import { QuestionButton } from '../../QuestionButton';
-import { useBuyDomain, useWeb3, useZnsSdk } from '../../../hooks';
-import { DEFAULT_NETWORK_PROTOCAL } from '../../../constants/network';
+import { DomainSearch } from '../../../domain-search/DomainSearch';
+import { QuestionButton } from '../../../ui/QuestionButton';
+import { Wizard, Tooltip } from '@zero-tech/zui/components';
+
 import styles from '../BuyDomainModal.module.scss';
 
 enum MintStep {

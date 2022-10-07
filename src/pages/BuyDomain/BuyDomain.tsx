@@ -1,14 +1,14 @@
 import type { FC } from 'react';
-
 import { useState } from 'react';
-import {
-	IconZero,
-	DomainSearch,
-	BuyDomainModal,
-	ConnectWallet,
-} from '../../components';
-import { useWeb3 } from '../../hooks';
+
+import { useWeb3 } from '../../lib/hooks';
+
+import { ConnectWallet } from '../../features/ui/ConnectWallet';
+
 import styles from './BuyDomain.module.scss';
+import { IconZero } from '../../features/buy-domain/Icons';
+import { DomainSearch } from '../../features/domain-search';
+import { BuyDomainModal } from '../../features/buy-domain/BuyDomainModal';
 
 export const BuyDomain: FC = () => {
 	const { account } = useWeb3();
