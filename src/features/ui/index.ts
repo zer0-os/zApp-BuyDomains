@@ -1,2 +1,3 @@
 export * from './ConnectWallet';
-export * from './QuestionButton';
+export * from './DefaultDomainMedia';
+export * from './Icons';

@@ -1,9 +1,10 @@
 import type { FC } from 'react';
+
 import { useState, useEffect, useCallback } from 'react';
 
-import { DefaultDomainMedia } from '.';
-import { QuestionButton } from '../../../ui/QuestionButton';
-import { Wizard, Tooltip } from '@zero-tech/zui/components';
+import { Wizard } from '@zero-tech/zui/components';
+import { InfoTooltip } from '@zero-tech/zui/components/InfoTooltip';
+import { DefaultDomainMedia } from '../../../ui';
 
 import { useZnsSdk, useWeb3 } from '../../../../lib/hooks';
 
@@ -123,9 +124,7 @@ export const Approve: FC<ApproveProps> = ({ onPrevStep, onNextStep }) => {
 							message={
 								<>
 									Approving ZERO spending, please wait...{'  '}
-									<Tooltip content="This may take up to 20 minutes depending on the state of the Ethereum network.">
-										<QuestionButton />
-									</Tooltip>
+									<InfoTooltip content="This may take up to 20 minutes depending on the state of the Ethereum network." />
 								</>
 							}
 						/>

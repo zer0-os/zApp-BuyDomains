@@ -6,7 +6,7 @@ import {
 	BUY_DOMAIN_STEPS,
 } from '../../../lib/constants/domains';
 
-import { Discover, Approve, Mint, Success } from './Elements';
+import { Discover, Approve, Mint, Success } from './Steps';
 import { Wizard, Modal } from '@zero-tech/zui/components';
 import { StepBar } from '@zero-tech/zui/components/StepBar';
 

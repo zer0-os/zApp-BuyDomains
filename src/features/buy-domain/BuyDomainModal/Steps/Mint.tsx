@@ -1,14 +1,14 @@
 import type { FC } from 'react';
+
 import { useState, useEffect, useCallback } from 'react';
 
 import { useBuyDomain, useWeb3, useZnsSdk } from '../../../../lib/hooks';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../../../lib/constants/network';
 
-import { DefaultDomainMedia } from '.';
-
-import { DomainSearch } from '../../../../features/buy-domain/DomainSearch';
-import { QuestionButton } from '../../../ui/QuestionButton';
-import { Wizard, Tooltip } from '@zero-tech/zui/components';
+import { Wizard } from '@zero-tech/zui/components';
+import { InfoTooltip } from '@zero-tech/zui/components/InfoTooltip';
+import { DomainSearch } from '../../DomainSearch';
+import { DefaultDomainMedia } from '../../../ui';
 
 import styles from '../BuyDomainModal.module.scss';
 
@@ -98,9 +98,7 @@ export const Mint: FC<MintProps> = ({ onNextStep }) => {
 								message={
 									<>
 										Minting your domain on the blockchain... {'  '}
-										<Tooltip content="This may take up to 20 mintutes depending on the state of the Ethereum blockchain. Please wait...">
-											<QuestionButton />
-										</Tooltip>
+										<InfoTooltip content="This may take up to 20 mintutes depending on the state of the Ethereum blockchain. Please wait..." />
 									</>
 								}
 							/>

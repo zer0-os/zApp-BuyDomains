@@ -6,8 +6,8 @@ import { useBuyDomain } from '../../../../lib/hooks';
 import { DOMAIN_TWEET_OPTION } from '../../../../lib/constants/domains';
 import { DEFAULT_NETWORK_PROTOCAL } from '../../../../lib/constants/network';
 
-import { DefaultDomainMedia } from '.';
 import { Button } from '@zero-tech/zui/components';
+import { DefaultDomainMedia } from '../../../ui';
 
 import styles from '../BuyDomainModal.module.scss';
 
