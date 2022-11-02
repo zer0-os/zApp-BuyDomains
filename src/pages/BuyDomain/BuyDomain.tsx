@@ -1,16 +1,12 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 
-import { useWeb3 } from '../../lib/hooks';
-
-import { ConnectWallet, IconZero } from '../../features/ui';
+import { IconZero } from '../../features/ui';
 import { DomainSearch, BuyDomainModal } from '../../features/buy-domain';
 
 import styles from './BuyDomain.module.scss';
 
 export const BuyDomain: FC = () => {
-	const { account } = useWeb3();
-
 	const [domainToPurchase, setDomainToPurchase] = useState<
 		string | undefined
 	>();
@@ -22,18 +18,6 @@ export const BuyDomain: FC = () => {
 	const onModalClose = () => {
 		setDomainToPurchase(undefined);
 	};
-
-	if (!account) {
-		return (
-			<div className={styles.Container}>
-				<div className={styles.Wrapper}>
-					<ConnectWallet
-						message={'Connect a Web3 wallet to see your Buy Domains data.'}
-					/>
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<>
