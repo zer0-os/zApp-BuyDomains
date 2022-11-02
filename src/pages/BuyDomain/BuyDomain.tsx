@@ -3,10 +3,8 @@ import { useState } from 'react';
 
 import { useWeb3 } from '../../lib/hooks';
 
-import { ConnectWallet } from '../../features/ui/ConnectWallet';
-import { IconZero } from '../../features/buy-domain/Icons';
-import { DomainSearch } from '../../features/buy-domain/DomainSearch';
-import { BuyDomainModal } from '../../features/buy-domain/BuyDomainModal';
+import { ConnectWallet, IconZero } from '../../features/ui';
+import { DomainSearch, BuyDomainModal } from '../../features/buy-domain';
 
 import styles from './BuyDomain.module.scss';
 
