@@ -1,6 +1,6 @@
 {
 	"name": "@zero-tech/zapp-buy-domains",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"description": "zApp for purchasing Zero namespace",
 	"main": "index.js",
 	"repository": {
