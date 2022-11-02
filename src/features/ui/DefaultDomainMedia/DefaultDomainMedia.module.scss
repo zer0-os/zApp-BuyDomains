@@ -1,0 +1,15 @@
+.Container {
+	position: relative;
+	width: 100%;
+	margin: 2.5rem 0;
+	padding-top: 56.25%; /* 16:9 Aspect Ratio */
+	border-radius: 0.5rem;
+	overflow: hidden;
+
+	video {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		object-fit: cover;
+	}
+}

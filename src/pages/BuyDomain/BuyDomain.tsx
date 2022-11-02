@@ -1,9 +1,8 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 
-import { IconZero } from '../../features/buy-domain/Icons';
-import { DomainSearch } from '../../features/buy-domain/DomainSearch';
-import { BuyDomainModal } from '../../features/buy-domain/BuyDomainModal';
+import { IconZero } from '../../features/ui';
+import { DomainSearch, BuyDomainModal } from '../../features/buy-domain';
 
 import styles from './BuyDomain.module.scss';
 

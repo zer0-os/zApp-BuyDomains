@@ -5,8 +5,8 @@ import {
 	useWeb3,
 } from '../../../../lib/hooks';
 
-import { DefaultDomainMedia } from '.';
-import { DomainSearch } from '../../../../features/buy-domain/DomainSearch';
+import { DomainSearch } from '../../DomainSearch';
+import { DefaultDomainMedia } from '../../../ui';
 
 import styles from '../BuyDomainModal.module.scss';
 

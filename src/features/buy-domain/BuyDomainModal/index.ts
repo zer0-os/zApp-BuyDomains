@@ -1,2 +1,2 @@
 export * from './BuyDomainModal';
-export * from './Elements';
+export * from './Steps';
