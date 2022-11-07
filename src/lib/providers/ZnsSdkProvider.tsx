@@ -19,6 +19,7 @@ export const ZnsSdkProvider: FC = ({ children }) => {
 		 */
 		const network = chainIdToNetworkType(chainId ?? DEFAULT_NETWORK);
 
+		console.log(network);
 		/**
 		 * Configure the SDK using provider based on selected network
 		 */
@@ -32,6 +33,12 @@ export const ZnsSdkProvider: FC = ({ children }) => {
 			case NETWORK_TYPES.RINKEBY: {
 				return zns.createInstance(
 					zns.configuration.rinkebyConfiguration(provider),
+				);
+			}
+
+			case NETWORK_TYPES.GOERLI: {
+				return zns.createInstance(
+					zns.configuration.goerliConfiguration(provider),
 				);
 			}
 
